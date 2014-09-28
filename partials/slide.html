@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h1>{{slide.title}} <small>{{slide.subTitle}}</small></h1>
+        </div>
+        <div ng-repeat="item in slide.content">
+            <div ng-switch="item.type">
+                <div ng-switch-when="image">
+                    <img ng-src="img/{{item.imgSource}}" width="100%"/>
+                </div>
+                <div ng-switch-when="table">
+                    <table class="table">
+                        <tr ng-repeat="currentRow in item.rows">
+                            <td ng-repeat="currentCol in currentRow.cols">
+                                {{currentCol}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div ng-switch-when="list">
+                    <ul>
+                        <li ng-repeat="listItem in item.items">{{listItem}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
