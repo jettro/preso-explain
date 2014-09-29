@@ -5,9 +5,11 @@ http://chieffancypants.github.io/angular-hotkeys/
 */
 function SlideCtrl($scope, elastic, $routeParams, hotkeys) {
     $scope.slide = "empty";
+    $scope.searchText = "";
+    $scope.searchResults = null;
 
     hotkeys.add({
-        combo: 'right',
+        combo: 'down',
         description: 'Go to the next slide.',
         callback: function() {
           $scope.showNextSlide();
@@ -15,7 +17,7 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys) {
     });
 
     hotkeys.add({
-        combo: 'left',
+        combo: 'up',
         description: 'Go to the previous slide.',
         callback: function() {
           $scope.showPreviousSlide();
@@ -32,6 +34,10 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys) {
 
     $scope.showPreviousSlide = function() {
         doShowPreviousSlide($scope.slide.slideId);
+    }
+
+    $scope.executeSearch = function() {
+        $scope.searchResults = "Ja hoor en nu nog zoeken";
     }
 
     function doShowSlide(slideId) {

@@ -5,6 +5,7 @@
 
 angular.module('myApp.directives', []).
 directive('slider', function($timeout) {
+	// http://www.sitepoint.com/creating-slide-show-plugin-angularjs/
   return {
     restrict: 'AE',
     replace: true,

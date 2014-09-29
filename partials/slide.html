@@ -6,7 +6,7 @@
         <div ng-repeat="item in slide.content">
             <div ng-switch="item.type">
                 <div ng-switch-when="image">
-                    <img ng-src="img/{{item.imgSource}}" width="100%"/>
+                    <img class="complete" ng-src="img/{{item.imgSource}}"/>
                 </div>
                 <div ng-switch-when="images">
                     <slider images="item.imgSources"/>
@@ -24,6 +24,17 @@
                     <ul>
                         <li ng-repeat="listItem in item.items">{{listItem}}</li>
                     </ul>
+                </div>
+                <div ng-switch-when="query">
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="searchText">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" ng-click="executeSearch()">Search!</button>
+                        </span>
+                    </div><!-- /input-group -->
+                    <div ng-show="searchResults">
+                        {{searchResults}}
+                    </div>
                 </div>
             </div>
         </div>

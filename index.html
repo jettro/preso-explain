@@ -11,7 +11,7 @@
     <link href="css/bootstrap-3.1.1.min.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
     <link href="css/bootstrap-theme-3.1.1.min.css" rel="stylesheet">
-
+    <link href="css/shCoreDefault.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -29,11 +29,21 @@
 <script src="lib/angular/hotkeys.min.js"></script>
 <script src="lib/elasticsearch/elasticsearch.angular-2.4.3.min.js"></script>
 
+<script src="lib/highlight/shCore.js"></script>
+<script src="lib/highlight/shBrushJScript.js"></script>
+
+
 <script src="js/app.js"></script>
 <script src="js/services.js"></script>
 <script src="js/controllers.js"></script>
 <script src="js/filters.js"></script>
 <script src="js/directives.js"></script>
+
+<script type="text/javascript">
+    SyntaxHighlighter.defaults['gutter'] = true;
+    SyntaxHighlighter.defaults['toolbar'] = false;
+    SyntaxHighlighter.all();
+</script>
 
 </body>
 </html>

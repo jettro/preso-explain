@@ -114,6 +114,75 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			]
 		}
 	],
+	"nextSlide":"executingquery"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"executingquery",
+	"title":"Executing a query",
+	"subTitle":"basic concepts",
+	"description":"In this slide I want to explain what it means to execute a query against elasticsearch.",
+	"content": [
+		{
+			"type":"list",
+			"items": [
+			  "Use the REST api,",
+			  "Use one of the drivers,",
+			  "A lot of different queries,",
+			  "Use query, filter, aggregations, highlighting, and ..."
+			]
+		}
+	],
+	"nextSlide":"showcurl"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"showcurl",
+	"title":"Example with curl",
+	"subTitle":"find all docs",
+	"description":"In this slide we present you the most basic match all docs query using curl.",
+	"content": [
+		{
+			"type":"image",
+			"imgSource":"showcurl.png"
+		}
+	],
+	"nextSlide":"otherquerytool"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"otherquerytool",
+	"title":"Other query tools",
+	"subTitle":"there are a lot",
+	"description":"Some examples of other query tools that are available.",
+	"content": [
+		{
+			"type":"list",
+			"items": [
+			  "Elasticsearch Marvel Sense,",
+			  "Plugins: Elasticsearch gui, Head, Kopf",
+			  "Java Driver and other language drivers",
+			  "Any rest client"
+			]
+		}
+	],
+	"nextSlide":"executequery"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"executequery",
+	"title":"Execute query",
+	"subTitle":"query string query",
+	"description":"This is the most basic variant of executing a query.",
+	"content": [
+		{
+			"type":"query"
+		}
+	],
 	"nextSlide":"start"
 }'
 
