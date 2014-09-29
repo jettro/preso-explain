@@ -1,6 +1,8 @@
 'use strict';
 
-/* Controllers */
+/* Controllers 
+http://chieffancypants.github.io/angular-hotkeys/
+*/
 function SlideCtrl($scope, elastic, $routeParams, hotkeys) {
     $scope.slide = "empty";
 
