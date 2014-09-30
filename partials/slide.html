@@ -30,7 +30,7 @@
                 </div>
                 <div ng-switch-when="query">
                     <pre>{{item.query | json}}</pre>
-                    <form ng-submit="executeSearch(item.queryType,searchText)">
+                    <form ng-submit="executeSearch(item.queryType,item.explain,searchText)">
                     <div class="input-group">                        
                         <input type="text" class="form-control" ng-model="searchText">
                         <span class="input-group-btn">

@@ -32,7 +32,7 @@ serviceModule.factory('elastic', ['esFactory', '$q', function (esFactory, $q) {
             });
         };
 
-        this.doMatchDescription = function(queryType, textToFind, resultCallback) {
+        this.doMatchDescription = function(queryType, textToFind, explain,resultCallback) {
             if (queryType === "validate") {
                 es.indices.validateQuery({
                     "index":"slides",
@@ -59,6 +59,7 @@ serviceModule.factory('elastic', ['esFactory', '$q', function (esFactory, $q) {
                 }
                 es.search({
                     "index":"slides",
+                    "explain":explain,
                     "body": query
                 }).then(function (results) {
                     resultCallback(results)

@@ -36,8 +36,8 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys) {
         doShowPreviousSlide($scope.slide.slideId);
     }
 
-    $scope.executeSearch = function(queryType,searchText) {
-        elastic.doMatchDescription(queryType, searchText, function(data) {
+    $scope.executeSearch = function(queryType,explain,searchText) {
+        elastic.doMatchDescription(queryType, searchText, explain, function(data) {
             $scope.searchResults = data;
         });
     }

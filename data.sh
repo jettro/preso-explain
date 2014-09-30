@@ -186,6 +186,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 		{
 			"type":"query",
 			"queryType":"match",
+			"explain":false,
 			"query": {
 				"query": {
 					"match": {
@@ -220,6 +221,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 		{
 			"type":"query",
 			"queryType":"sort",
+			"explain":false,
 			"query": {
 				"query": {
 					"match": {
@@ -263,5 +265,56 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			}
 		}
 	],
+	"nextSlide":"explainquery"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"explainquery",
+	"title":"Explain query results",
+	"subTitle":"use the explain api",
+	"description":"Here we are going to discuss the most basic explain you can get.",
+	"content": [
+		{
+			"type":"notification",
+			"text":"GET /slides/_search?explain"
+		},
+		{
+			"type":"query",
+			"queryType":"match",
+			"explain":true,
+			"query": {
+				"query": {
+					"match": {
+						"description":"What you type!"
+					}
+				}
+			}
+		}
+	],
+	"nextSlide":"explainqueryexplained"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"explainqueryexplained",
+	"title":"Explain query explained",
+	"subTitle":"the basics",
+	"description":"In this slide I am going to show details about the explain basics.",
+	"content": [
+		{
+			"type":"images",
+			"imgSources": [
+			  {"src":"explainqueryexplained1.png","visible":true},
+			  {"src":"explainqueryexplained2.png","visible":false},
+			  {"src":"explainqueryexplained3.png","visible":false},
+			  {"src":"explainqueryexplained4.png","visible":false},
+			  {"src":"explainqueryexplained5.png","visible":false},
+			  {"src":"explainqueryexplained6.png","visible":false}
+			]
+		}
+	],
 	"nextSlide":"start"
 }'
+
+
