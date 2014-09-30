@@ -5,6 +5,9 @@
         </div>
         <div ng-repeat="item in slide.content">
             <div ng-switch="item.type">
+                <div ng-switch-when="notification">
+                    <div class="alert alert-success" role="alert">{{item.text}}</div>
+                </div>                
                 <div ng-switch-when="image">
                     <img class="complete" ng-src="img/{{item.imgSource}}"/>
                 </div>
@@ -26,14 +29,17 @@
                     </ul>
                 </div>
                 <div ng-switch-when="query">
-                    <div class="input-group">
+                    <pre>{{item.query | json}}</pre>
+                    <form ng-submit="executeSearch(item.queryType,searchText)">
+                    <div class="input-group">                        
                         <input type="text" class="form-control" ng-model="searchText">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" ng-click="executeSearch()">Search!</button>
+                            <button class="btn btn-default" type="submit" >Search!</button>
                         </span>
                     </div><!-- /input-group -->
+                    </form>
                     <div ng-show="searchResults">
-                        {{searchResults}}
+                        <pre>{{searchResults | json}}</pre>
                     </div>
                 </div>
             </div>

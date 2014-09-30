@@ -5,7 +5,7 @@ http://chieffancypants.github.io/angular-hotkeys/
 */
 function SlideCtrl($scope, elastic, $routeParams, hotkeys) {
     $scope.slide = "empty";
-    $scope.searchText = "";
+    $scope.searchText = "basic";
     $scope.searchResults = null;
 
     hotkeys.add({
@@ -36,8 +36,10 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys) {
         doShowPreviousSlide($scope.slide.slideId);
     }
 
-    $scope.executeSearch = function() {
-        $scope.searchResults = "Ja hoor en nu nog zoeken";
+    $scope.executeSearch = function(queryType,searchText) {
+        elastic.doMatchDescription(queryType, searchText, function(data) {
+            $scope.searchResults = data;
+        });
     }
 
     function doShowSlide(slideId) {

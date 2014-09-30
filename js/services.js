@@ -32,10 +32,43 @@ serviceModule.factory('elastic', ['esFactory', '$q', function (esFactory, $q) {
             });
         };
 
-        this.doSearch = function (query, resultCallback) {
-            if (query.index === "") {
-                query.index = activeIndexes;
+        this.doMatchDescription = function(queryType, textToFind, resultCallback) {
+            if (queryType === "validate") {
+                es.indices.validateQuery({
+                    "index":"slides",
+                    "explain": true,
+                    "body": {
+                        "query": {
+                            "multi_match": {
+                                "query": textToFind,
+                                "fields": ["description","title","subTitle"]
+                            }
+                        }
+                    }
+                }).then(function (results) {
+                    resultCallback(results)
+                }, function (errors) {
+                    console.log(errors);
+                });
+            } else {
+                var query = {};
+                if (queryType === "match") {
+                    query = {"query":{"match":{"description":textToFind}}};
+                } else if (queryType === "sort") {
+                    query = {"query":{"match":{"description":textToFind}},"sort":[{"slideId":{"order":"asc"}}]};
+                }
+                es.search({
+                    "index":"slides",
+                    "body": query
+                }).then(function (results) {
+                    resultCallback(results)
+                }, function (errors) {
+                    console.log(errors);
+                });
             }
+        };
+
+        this.doSearch = function (query, resultCallback) {
             es.search(query).then(function (results) {
                 resultCallback(results)
             }, function (errors) {

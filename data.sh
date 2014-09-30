@@ -180,9 +180,88 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"description":"This is the most basic variant of executing a query.",
 	"content": [
 		{
-			"type":"query"
+			"type":"notification",
+			"text":"GET /slides/_search"
+		},
+		{
+			"type":"query",
+			"queryType":"match",
+			"query": {
+				"query": {
+					"match": {
+						"description":"What you type!"
+					}
+				}
+			}
+		}
+	],
+	"nextSlide":"sortingresults"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"sortingresults",
+	"title":"Sorting results",
+	"subTitle":"by score and ...",
+	"description":"In this slide I want to discuss the options you have for sorting results.",
+	"content": [
+		{
+			"type":"list",
+			"items": [
+			  "Sort by score (the default),",
+			  "Sort by date,",
+			  "Sort by analyzed fields,"
+			]
+		},
+		{
+			"type":"notification",
+			"text":"GET /slides/_search"
+		},
+		{
+			"type":"query",
+			"queryType":"sort",
+			"query": {
+				"query": {
+					"match": {
+						"description":"What you type!"
+					}
+				},
+				"sort": [
+    				{
+      					"slideId": {
+        					"order": "asc"
+      					}
+    				}
+  				]
+			}
+		}
+	],
+	"nextSlide":"validatequery"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"validatequery",
+	"title":"Validate query",
+	"subTitle":"using validate api",
+	"description":"In this slide we are going to demonstrate the validate api for a query using explain as well, showing the query_string translation.",
+	"content": [
+		{
+			"type":"notification",
+			"text":"POST /slides/_validate/query?explain"
+		},
+		{
+			"type":"query",
+			"queryType":"validate",
+			"query": {
+				"query": {
+					"multi_match": {
+					  "query": "basic search",
+					  "fields": ["description","title","subTitle"]
+					}
+				}
+			}
 		}
 	],
 	"nextSlide":"start"
 }'
-
