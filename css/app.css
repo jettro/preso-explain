@@ -1,8 +1,13 @@
 body { 
 	margin: 10px;
+	font-size: 20pt;
 }
 
 img.complete {
     width:100%;
     max-width:980px;
+}
+
+pre.code {
+	font-size: 18pt;
 }

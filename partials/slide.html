@@ -17,7 +17,7 @@
                 <div ng-switch-when="table">
                     <table class="table">
                         <tr ng-repeat="currentRow in item.rows">
-                            <td ng-repeat="currentCol in currentRow.cols">
+                            <td ng-repeat="currentCol in currentRow.cols track by $index">
                                 {{currentCol}}
                             </td>
                         </tr>
@@ -29,7 +29,7 @@
                     </ul>
                 </div>
                 <div ng-switch-when="query">
-                    <pre>{{item.query | json}}</pre>
+                    <pre class="code">{{item.query | json}}</pre>
                     <form ng-submit="executeSearch(item.queryType,item.explain,searchText)">
                     <div class="input-group">                        
                         <input type="text" class="form-control" ng-model="searchText">
@@ -39,7 +39,24 @@
                     </div><!-- /input-group -->
                     </form>
                     <div ng-show="searchResults">
-                        <pre>{{searchResults | json}}</pre>
+                        <pre class="code">{{searchResults | json}}</pre>
+                    </div>
+                </div>
+                <div ng-switch-when="query123">
+                    <form class="form-inline" role="form" ng-submit="executeSearch123(searchText,searchOperator)">
+                        <div class="btn-group">
+                            <label class="btn btn-default" ng-model="searchOperator" btn-radio="'or'">OR</label>
+                            <label class="btn btn-default" ng-model="searchOperator" btn-radio="'and'">AND</label>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">                        
+                                <input type="text" class="form-control" ng-model="searchText">
+                            </div>
+                        </div>
+                        <button class="btn btn-default" type="submit" >Search!</button>
+                    </form>
+                    <div ng-show="searchResults">
+                        <pre class="code">{{searchResults | json}}</pre>
                     </div>
                 </div>
             </div>

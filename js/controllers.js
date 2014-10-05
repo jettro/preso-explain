@@ -6,6 +6,7 @@ http://chieffancypants.github.io/angular-hotkeys/
 function SlideCtrl($scope, elastic, $routeParams, hotkeys) {
     $scope.slide = "empty";
     $scope.searchText = "basic";
+    $scope.searchOperator = "or";
     $scope.searchResults = null;
 
     hotkeys.add({
@@ -42,7 +43,14 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys) {
         });
     }
 
+    $scope.executeSearch123 = function(searchText,searchOperator) {
+        elastic.doMatch123(searchText, searchOperator, function(data) {
+            $scope.searchResults = data;
+        });
+    }
+
     function doShowSlide(slideId) {
+        $scope.searchResults = null;
         elastic.obtainSlide(slideId, function(data) {
             $scope.slide = data;
         });

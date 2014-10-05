@@ -23,10 +23,6 @@ curl -s -XPUT 'http://localhost:9200/slides' -d '
         "description": {
           "type": "string"
         },
-        "content": {
-          "type": "object", 
-          "index": "no"
-        },
         "nextSlide": {
           "type": "string",
           "index": "not_analyzed"
@@ -61,6 +57,9 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 		{
 			"type":"table",
 			"rows": [
+				{
+					"cols": ["email","jettro.coenradie@luminis.eu"]
+				},			
 				{
 					"cols": ["twitter","@jettroCoenradie"]
 				},
@@ -314,7 +313,124 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			]
 		}
 	],
+	"nextSlide":"explaintheorysimilarity"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"explaintheorysimilarity",
+	"title":"Calculating score",
+	"subTitle":"the theory",
+	"description":"In this slide we are going to explain the theory behind creating score using simulariry algorithms.",
+	"content": [
+		{
+			"type":"list",
+			"items": [
+			  "Score is calculated for matching documents,",
+			  "Score represents how similar the search terms and the document terms are,",
+			  "Default for Lucene is comination of Boolean Model, TF/IDF and the Vector Space Model,",
+			  "Other algorithms are available: BM25"
+			]
+		}
+	],
+	"nextSlide":"explaintheorytfidf"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"explaintheorytfidf",
+	"title":"Calculating score",
+	"subTitle":"the terms",
+	"description":"This slide gives an overview of the most important definitions for calculating the score.",
+	"content": [
+		{
+			"type":"table",
+			"rows": [
+				{
+					"cols": ["queryNorm","Attempt to make different queries comparable."]
+				},			
+				{
+					"cols": ["coord","Factor for total score based on amount of queried and found terms"]
+				},
+				{
+					"cols": ["Term frequency","Amount of times a term is matched in the field"]
+				},
+				{
+				    "cols": ["Inverse document frequency","amount of documents that have the term"]
+				},
+				{
+				    "cols": ["fieldNorm","Length of the field the terms was found in"]
+				},
+				{
+				    "cols": ["boost","Boost a field score"]
+				}
+			]
+		}
+	],
+	"nextSlide":"explaintablematchquery"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"explaintablematchquery",
+	"title":"An explain example",
+	"subTitle":"using match query",
+	"description":"In this slide we are going to use a very simple match query with an index containing only three documents.",
+	"content": [
+		{
+			"type":"notification",
+			"text":"Show tf/idf/fieldNorm and score"
+		},
+		{
+			"type":"table",
+			"rows": [
+				{
+					"cols": ["","Doc 1","Doc 2", "Doc 3"]
+				},			
+				{
+					"cols": ["","one two three","two three", "three"]
+				},			
+				{
+					"cols": ["one", "1 / 1 / 0.5", "", ""]
+				},
+				{
+					"cols": ["","0.702", "",""]
+				},
+				{
+				    "cols": ["two","1 / 2 / 0.5", "1 / 2 / 0.625", ""]
+				},
+				{
+				    "cols": ["","0.5","0.625",""]
+				},
+				{
+				    "cols": ["three","1 / 3 / 0.5", "1 / 3 / 0.625", "1 / 3 / 1"]
+				},
+				{
+				    "cols": ["","0.356","0.445","0.712"]
+				}
+			]			
+		}
+	],
+	"nextSlide":"explainonetwothree"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"explainonetwothree",
+	"title":"Explain multiple terms",
+	"subTitle":"with a trick",
+	"description":"Here we are going to shows what happens to the results when using capital letters, multipe terms and introduce the camel case analyzer.",
+	"content": [
+		{
+			"type":"notification",
+			"text":"GET /onetwothree/_search?explain"
+		},
+		{
+			"type":"query123"
+		}
+	],
 	"nextSlide":"start"
 }'
+
 
 

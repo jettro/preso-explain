@@ -32,7 +32,7 @@ serviceModule.factory('elastic', ['esFactory', '$q', function (esFactory, $q) {
             });
         };
 
-        this.doMatchDescription = function(queryType, textToFind, explain,resultCallback) {
+        this.doMatchDescription = function(queryType, textToFind, explain, resultCallback) {
             if (queryType === "validate") {
                 es.indices.validateQuery({
                     "index":"slides",
@@ -67,6 +67,20 @@ serviceModule.factory('elastic', ['esFactory', '$q', function (esFactory, $q) {
                     console.log(errors);
                 });
             }
+        };
+
+        this.doMatch123 = function(textToFind, useOperator, resultCallback){
+            var query = {};
+            query = {"query":{"match":{"title":{"query":textToFind,"operator":useOperator}}}};
+            es.search({
+                "index":"onetwothree",
+                "explain":true,
+                "body": query
+            }).then(function (results) {
+                resultCallback(results)
+            }, function (errors) {
+                console.log(errors);
+            });            
         };
 
         this.doSearch = function (query, resultCallback) {
