@@ -24,9 +24,7 @@
                     </table>
                 </div>
                 <div ng-switch-when="list">
-                    <ul>
-                        <li ng-repeat="listItem in item.items">{{listItem}}</li>
-                    </ul>
+                    <bullits listitems="item.items"/>
                 </div>
                 <div ng-switch-when="query">
                     <pre class="code">{{item.query | json}}</pre>

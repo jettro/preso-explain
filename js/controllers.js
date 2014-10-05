@@ -8,12 +8,13 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys) {
     $scope.searchText = "basic";
     $scope.searchOperator = "or";
     $scope.searchResults = null;
+    $scope.listItems = [];
 
     hotkeys.add({
         combo: 'down',
         description: 'Go to the next slide.',
         callback: function() {
-          $scope.showNextSlide();
+            doShowSlide($scope.slide.nextSlide);
         }
     });
 
@@ -21,20 +22,12 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys) {
         combo: 'up',
         description: 'Go to the previous slide.',
         callback: function() {
-          $scope.showPreviousSlide();
+            doShowPreviousSlide($scope.slide.slideId);
         }
     });
 
     $scope.showSlide = function(slideId) {
         doShowSlide(slideId);
-    }
-
-    $scope.showNextSlide = function() {
-        doShowSlide($scope.slide.nextSlide);
-    }
-
-    $scope.showPreviousSlide = function() {
-        doShowPreviousSlide($scope.slide.slideId);
     }
 
     $scope.executeSearch = function(queryType,explain,searchText) {
@@ -49,8 +42,15 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys) {
         });
     }
 
+    $scope.showNextItem = function(items, currentItem) {
+        if (currentItem < items.length) {
+            items[currentItem+1].visible = true;
+        }
+    }
+
     function doShowSlide(slideId) {
         $scope.searchResults = null;
+        $scope.searchOperator = "or";
         elastic.obtainSlide(slideId, function(data) {
             $scope.slide = data;
         });

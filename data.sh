@@ -88,8 +88,14 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 		{
 			"type":"list",
 			"items": [
-			  "Scalable search solution",
-			  "Schemaless, yeah right"
+				{
+					"visible":true,
+					"text":"Scalable search solution"
+				},
+				{
+					"visible":false,
+					"text":"Schemaless, yeah right"
+				}
 			]
 		}
 	],
@@ -126,10 +132,22 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 		{
 			"type":"list",
 			"items": [
-			  "Use the REST api,",
-			  "Use one of the drivers,",
-			  "A lot of different queries,",
-			  "Use query, filter, aggregations, highlighting, and ..."
+			{
+				"visible":true,
+				"text":"Use the REST api,"
+			},
+			{
+				"visible":false,
+				"text":"Use one of the drivers,"
+			},
+			{
+				"visible":false,
+				"text":"A lot of different queries,"
+			},
+			{
+				"visible":false,
+				"text":"Use query, filter, aggregations, highlighting, and ..."
+			}
 			]
 		}
 	],
@@ -161,10 +179,22 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 		{
 			"type":"list",
 			"items": [
-			  "Elasticsearch Marvel Sense,",
-			  "Plugins: Elasticsearch gui, Head, Kopf",
-			  "Java Driver and other language drivers",
-			  "Any rest client"
+			{
+				"visible":true,
+				"text":"Elasticsearch Marvel Sense,"
+			},
+			{
+				"visible":false,
+				"text":"Plugins: Elasticsearch gui, Head, Kopf"
+			},
+			{
+				"visible":false,
+				"text":"Java Driver and other language drivers"
+			},
+			{
+				"visible":false,
+				"text":"Any rest client"
+			}
 			]
 		}
 	],
@@ -208,9 +238,18 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 		{
 			"type":"list",
 			"items": [
-			  "Sort by score (the default),",
-			  "Sort by date,",
-			  "Sort by analyzed fields,"
+			  {
+				"visible":true,
+				"text":"Sort by score (the default),"
+			},
+			{
+				"visible":false,
+				"text":"Sort by date,"
+			},
+			{
+				"visible":false,
+				"text":"Sort by analyzed fields,"
+			}
 			]
 		},
 		{
@@ -326,10 +365,22 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 		{
 			"type":"list",
 			"items": [
-			  "Score is calculated for matching documents,",
-			  "Score represents how similar the search terms and the document terms are,",
-			  "Default for Lucene is comination of Boolean Model, TF/IDF and the Vector Space Model,",
-			  "Other algorithms are available: BM25"
+				{
+					"visible":true,
+					"text":"Score is calculated for matching documents,"
+				},
+				{
+					"visible":false,
+					"text":"Score represents how similar the search terms and the document terms are,"
+				},
+				{
+					"visible":false,
+					"text":"Default for Lucene is comination of Boolean Model, TF/IDF and the Vector Space Model,"
+				},
+				{
+					"visible":false,
+					"text":"Other algorithms are available: BM25"
+				}
 			]
 		}
 	],
