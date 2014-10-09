@@ -99,6 +99,14 @@ serviceModule.factory('elastic', ['esFactory', '$q', function (esFactory, $q) {
             });
         }
 
+        this.obtainMappings = function(index, resultCallback) {
+            es.indices.getMapping({"index":index}).then(function(results) {
+                resultCallback(results);
+            }, function(errors) {
+                console.log(errors);
+            });
+        }
+
         function createEsFactory() {
             return esFactory({"host": serverUrl, "apiVersion": "1.3"});
         }

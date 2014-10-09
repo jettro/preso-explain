@@ -418,8 +418,29 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			]
 		}
 	],
+	"nextSlide":"lucenesimilarityformula"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"lucenesimilarityformula",
+	"title":"Lucene similarity",
+	"subTitle":"formula",
+	"description":"Shows the formula used by lucene to calculate the score.",
+	"content": [
+		{
+			"type":"image",
+			"imgSource":"lucenesimilarityformula.png"
+		},
+		{
+			"type":"reference",
+			"reference":"https://lucene.apache.org/core/4_0_0/core/org/apache/lucene/search/similarities/TFIDFSimilarity.html"
+		}
+	],
 	"nextSlide":"explaintablematchquery"
 }'
+
+
 
 curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 {
@@ -553,7 +574,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"onetwothreeanalyzer",
 	"title":"One Two Three Analyzer",
-	"subTitle":"Camel case",
+	"subTitle":"settings",
 	"description":"Show the analyzer as used in the onetwothree sample with the camel case.",
 	"content": [
 		{
@@ -566,7 +587,26 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			"parameter":"onetwothree"
 		}
 	],
-	"nextSlide":"start"
+	"nextSlide":"onetwothreeanalyzer2"
 }'
 
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"onetwothreeanalyzer2",
+	"title":"One Two Three Analyzer",
+	"subTitle":"mappings",
+	"description":"Show the analyzer as used in the onetwothree sample with the camel case.",
+	"content": [
+		{
+			"type":"notification",
+			"text":"GET /onetwothree/_mappings"
+		},
+		{
+			"type":"executeget",
+			"executetype":"mappings",
+			"parameter":"onetwothree"
+		}
+	],
+	"nextSlide":"start"
+}'
 

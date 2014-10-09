@@ -8,6 +8,9 @@
                 <div ng-switch-when="notification">
                     <div class="alert alert-success" role="alert">{{item.text}}</div>
                 </div>                
+                <div ng-switch-when="reference">
+                    <div class="alert alert-info" role="alert">{{item.reference}}</div>
+                </div>                
                 <div ng-switch-when="image">
                     <img class="complete" ng-src="img/{{item.imgSource}}"/>
                 </div>

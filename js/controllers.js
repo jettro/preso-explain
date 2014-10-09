@@ -47,6 +47,10 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys) {
             elastic.obtainSettings(parameter, function(data) {
                 $scope.searchResults = data;
             });            
+        } else if ("mappings" === type) {
+            elastic.obtainMappings(parameter, function(data) {
+                $scope.searchResults = data;
+            });            
         }
     }
 
