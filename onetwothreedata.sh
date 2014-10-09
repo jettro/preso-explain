@@ -9,7 +9,7 @@ curl -s -XPUT 'http://localhost:9200/onetwothree' -d '
       "analyzer": {
         "camel": {
           "type": "pattern",
-          "pattern": "([^\\p{L}\\d]+) | (?<=[ \\p{L} && [^\\p{Lu}]])(?=\\p{Lu})"
+          "pattern": "([^\\p{L}\\d]+)|(?<=[ \\p{L} && [^\\p{Lu}]])(?=\\p{Lu})"
         }
       }
     }

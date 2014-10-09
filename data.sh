@@ -82,18 +82,18 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"whatiselastic",
 	"title":"What is elasticsearch?",
-	"subTitle":"",
+	"subTitle":"more than search",
 	"description":"Start introducing elasticsearch, explain the vey basic things that need to be known.",
 	"content": [
 		{
 			"type":"list",
 			"items": [
 				{
-					"visible":true,
+					"showme":true,
 					"text":"Scalable search solution"
 				},
 				{
-					"visible":false,
+					"showme":false,
 					"text":"Schemaless, yeah right"
 				}
 			]
@@ -112,10 +112,10 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 		{
 			"type":"images",
 			"imgSources": [
-			  {"src":"elasticlucene1.png","visible":true},
-			  {"src":"elasticlucene2.png","visible":true},
-			  {"src":"elasticlucene3.png","visible":true},
-			  {"src":"elasticlucene4.png","visible":true}
+			  {"src":"elasticlucene1.png","showme":true},
+			  {"src":"elasticlucene2.png","showme":true},
+			  {"src":"elasticlucene3.png","showme":true},
+			  {"src":"elasticlucene4.png","showme":true}
 			]
 		}
 	],
@@ -133,19 +133,19 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			"type":"list",
 			"items": [
 			{
-				"visible":true,
+				"showme":true,
 				"text":"Use the REST api,"
 			},
 			{
-				"visible":false,
+				"showme":false,
 				"text":"Use one of the drivers,"
 			},
 			{
-				"visible":false,
+				"showme":false,
 				"text":"A lot of different queries,"
 			},
 			{
-				"visible":false,
+				"showme":false,
 				"text":"Use query, filter, aggregations, highlighting, and ..."
 			}
 			]
@@ -180,19 +180,19 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			"type":"list",
 			"items": [
 			{
-				"visible":true,
+				"showme":true,
 				"text":"Elasticsearch Marvel Sense,"
 			},
 			{
-				"visible":false,
+				"showme":false,
 				"text":"Plugins: Elasticsearch gui, Head, Kopf"
 			},
 			{
-				"visible":false,
+				"showme":false,
 				"text":"Java Driver and other language drivers"
 			},
 			{
-				"visible":false,
+				"showme":false,
 				"text":"Any rest client"
 			}
 			]
@@ -239,15 +239,15 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			"type":"list",
 			"items": [
 			  {
-				"visible":true,
+				"showme":true,
 				"text":"Sort by score (the default),"
 			},
 			{
-				"visible":false,
+				"showme":false,
 				"text":"Sort by date,"
 			},
 			{
-				"visible":false,
+				"showme":false,
 				"text":"Sort by analyzed fields,"
 			}
 			]
@@ -343,12 +343,12 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 		{
 			"type":"images",
 			"imgSources": [
-			  {"src":"explainqueryexplained1.png","visible":true},
-			  {"src":"explainqueryexplained2.png","visible":false},
-			  {"src":"explainqueryexplained3.png","visible":false},
-			  {"src":"explainqueryexplained4.png","visible":false},
-			  {"src":"explainqueryexplained5.png","visible":false},
-			  {"src":"explainqueryexplained6.png","visible":false}
+			  {"src":"explainqueryexplained1.png","showme":true},
+			  {"src":"explainqueryexplained2.png","showme":false},
+			  {"src":"explainqueryexplained3.png","showme":false},
+			  {"src":"explainqueryexplained4.png","showme":false},
+			  {"src":"explainqueryexplained5.png","showme":false},
+			  {"src":"explainqueryexplained6.png","showme":false}
 			]
 		}
 	],
@@ -366,19 +366,19 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			"type":"list",
 			"items": [
 				{
-					"visible":true,
+					"showme":true,
 					"text":"Score is calculated for matching documents,"
 				},
 				{
-					"visible":false,
+					"showme":false,
 					"text":"Score represents how similar the search terms and the document terms are,"
 				},
 				{
-					"visible":false,
+					"showme":false,
 					"text":"Default for Lucene is comination of Boolean Model, TF/IDF and the Vector Space Model,"
 				},
 				{
-					"visible":false,
+					"showme":false,
 					"text":"Other algorithms are available: BM25"
 				}
 			]
@@ -480,8 +480,93 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			"type":"query123"
 		}
 	],
-	"nextSlide":"start"
+	"nextSlide":"whatisanalyser"
 }'
 
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"whatisanalyser",
+	"title":"What is an analyzer",
+	"subTitle":"the parts",
+	"description":"Explain what the different components of an analyzer are.",
+	"content": [
+		{
+			"type":"table",
+			"rows": [
+				{
+					"cols": ["Character filters","Tidy up the string before tokenising."]
+				},			
+				{
+					"cols": ["Tokeniser","Splits the string into a number of tokens"]
+				},
+				{
+					"cols": ["Token filters","Do something with the tokens"]
+				}
+			]
+		}
+	],
+	"nextSlide":"showananalyser"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"showananalyser",
+	"title":"Show an analyzer",
+	"subTitle":"a basic analyzer",
+	"description":"Explain what the different components of an analyzer are.",
+	"content": [
+		{
+			"type":"notification",
+			"text":"PUT /newindex"
+		},
+		{
+			"type":"code",
+			"code": {
+			  "settings": {
+			      "analysis": {
+			        "analyzer": {
+			          "filtered_keyword" : {
+			            "type":"custom",
+			            "tokenizer":"keyword",
+			            "filter": ["lowercase","asciifolding"]
+			          }
+			        }
+			      }
+			  },
+			  "mappings": {
+			    "mytype": {
+			      "properties": {
+			        "title": {
+			          "type": "string",
+			          "analyzer": "filtered_keyword"
+			        }
+			      }
+			    }
+			  }
+			}
+		}
+	],
+	"nextSlide":"onetwothreeanalyzer"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"onetwothreeanalyzer",
+	"title":"One Two Three Analyzer",
+	"subTitle":"Camel case",
+	"description":"Show the analyzer as used in the onetwothree sample with the camel case.",
+	"content": [
+		{
+			"type":"notification",
+			"text":"GET /onetwothree/_settings"
+		},
+		{
+			"type":"executeget",
+			"executetype":"settings",
+			"parameter":"onetwothree"
+		}
+	],
+	"nextSlide":"start"
+}'
 
 

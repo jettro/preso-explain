@@ -57,6 +57,15 @@
                         <pre class="code">{{searchResults | json}}</pre>
                     </div>
                 </div>
+                <div ng-switch-when="code">
+                    <pre class="code">{{item.code | json}}</pre>
+                </div>
+                <div ng-switch-when="executeget">
+                    <button class="btn btn-default" type="button" ng-click="executeQuery(item.executetype,item.parameter)">Execute!</button>
+                    <div ng-show="searchResults">
+                        <pre class="code">{{searchResults | json}}</pre>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -42,6 +42,14 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys) {
         });
     }
 
+    $scope.executeQuery = function(type,parameter) {
+        if ("settings" === type) {
+            elastic.obtainSettings(parameter, function(data) {
+                $scope.searchResults = data;
+            });            
+        }
+    }
+
     $scope.showNextItem = function(items, currentItem) {
         if (currentItem < items.length) {
             items[currentItem+1].visible = true;
