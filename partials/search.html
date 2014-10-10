@@ -1,5 +1,10 @@
 <div class="row">
     <div class="col-md-12">
-        Maybe use this for a search in the slides
+    	<h1>Summary</h1>
+    	<div ng-repeat="item in searchResults track by $index">
+    		<h2>{{item.title}}</h2>
+    		<span class="subtitle">{{item.subTitle}}</span><span class="btn btn-link" ng-click="openSlide(item.slideId)">open</span>
+    		<p>{{item.description}}</p>
+    	</div>
     </div>
 </div>

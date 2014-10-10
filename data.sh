@@ -384,6 +384,25 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			]
 		}
 	],
+	"nextSlide":"lucenesimilarityformula"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"lucenesimilarityformula",
+	"title":"Lucene similarity",
+	"subTitle":"formula",
+	"description":"Shows the formula used by lucene to calculate the score.",
+	"content": [
+		{
+			"type":"image",
+			"imgSource":"lucenesimilarityformula.png"
+		},
+		{
+			"type":"reference",
+			"reference":"https://lucene.apache.org/core/4_0_0/core/org/apache/lucene/search/similarities/TFIDFSimilarity.html"
+		}
+	],
 	"nextSlide":"explaintheorytfidf"
 }'
 
@@ -418,29 +437,8 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			]
 		}
 	],
-	"nextSlide":"lucenesimilarityformula"
-}'
-
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
-{
-  "slideId":"lucenesimilarityformula",
-	"title":"Lucene similarity",
-	"subTitle":"formula",
-	"description":"Shows the formula used by lucene to calculate the score.",
-	"content": [
-		{
-			"type":"image",
-			"imgSource":"lucenesimilarityformula.png"
-		},
-		{
-			"type":"reference",
-			"reference":"https://lucene.apache.org/core/4_0_0/core/org/apache/lucene/search/similarities/TFIDFSimilarity.html"
-		}
-	],
 	"nextSlide":"explaintablematchquery"
 }'
-
-
 
 curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 {
@@ -605,6 +603,26 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			"type":"executeget",
 			"executetype":"mappings",
 			"parameter":"onetwothree"
+		}
+	],
+	"nextSlide":"onetwothreeanalyzer3"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"onetwothreeanalyzer3",
+	"title":"One Two Three Analyzer",
+	"subTitle":"analyze api",
+	"description":"Test the analyzer using the analyze api.",
+	"content": [
+		{
+			"type":"notification",
+			"text":"GET /onetwothree/_analyze?analyzer=camel&text=OneTwoThree"
+		},
+		{
+			"type":"executeget",
+			"executetype":"analyze",
+			"parameter":["onetwothree","camel","OneTwoThree"]
 		}
 	],
 	"nextSlide":"start"

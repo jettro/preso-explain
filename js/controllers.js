@@ -3,7 +3,7 @@
 /* Controllers 
 http://chieffancypants.github.io/angular-hotkeys/
 */
-function SlideCtrl($scope, elastic, $routeParams, hotkeys) {
+function SlideCtrl($scope, elastic, $routeParams, hotkeys, $location) {
     $scope.slide = "empty";
     $scope.searchText = "basic";
     $scope.searchOperator = "or";
@@ -14,7 +14,8 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys) {
         combo: 'down',
         description: 'Go to the next slide.',
         callback: function() {
-            doShowSlide($scope.slide.nextSlide);
+            var path = $location.path().replace($scope.slide.slideId,$scope.slide.nextSlide);
+            $location.path(path);
         }
     });
 
@@ -25,10 +26,6 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys) {
             doShowPreviousSlide($scope.slide.slideId);
         }
     });
-
-    $scope.showSlide = function(slideId) {
-        doShowSlide(slideId);
-    }
 
     $scope.executeSearch = function(queryType,explain,searchText) {
         elastic.doMatchDescription(queryType, searchText, explain, function(data) {
@@ -51,6 +48,10 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys) {
             elastic.obtainMappings(parameter, function(data) {
                 $scope.searchResults = data;
             });            
+        } else if ("analyze" === type) {
+            elastic.doAnalyze(parameter[0],parameter[1],parameter[2], function(data){
+                $scope.searchResults = data;
+            });
         }
     }
 
@@ -70,20 +71,37 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys) {
 
     function doShowPreviousSlide(slideId) {
         elastic.obtainPreviousSlide(slideId, function(data) {
-            if (data) {                
-                $scope.slide = data;
+            if (data) {
+                var path = $location.path().replace(data.nextSlide,data.slideId);
+                $location.path(path);
             }
         });
     }
 
     $scope.$on('$viewContentLoaded', function () {
-        var startSlide = $routeParams.slideId;
-        doShowSlide(startSlide);
+        doShowSlide($routeParams.slideId);
     });
 }
-SlideCtrl.$inject = ['$scope', 'elastic', '$routeParams', 'hotkeys'];
+SlideCtrl.$inject = ['$scope', 'elastic', '$routeParams', 'hotkeys', '$location'];
 
-function SearchCtrl($scope, elastic) {
+function SearchCtrl($scope, elastic, $location) {
+    $scope.searchResults = [];
 
+    $scope.openSlide = function(slideId) {
+        $location.path('/slide/'+slideId);
+    }
+
+    function doShowSlide(slideId) {
+        elastic.obtainSlide(slideId, function(data) {
+            $scope.searchResults.push(data);
+            if ("start" != data.nextSlide) {
+                doShowSlide(data.nextSlide)
+            }
+        });
+    }
+
+    $scope.$on('$viewContentLoaded', function () {
+        doShowSlide("start");
+    });    
 }
-SearchCtrl.$inject = ['$scope', 'elastic'];
+SearchCtrl.$inject = ['$scope', 'elastic', '$location'];

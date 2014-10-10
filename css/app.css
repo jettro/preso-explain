@@ -11,3 +11,7 @@ img.complete {
 pre.code {
 	font-size: 18pt;
 }
+
+.subtitle {
+	font-style: italic;
+}

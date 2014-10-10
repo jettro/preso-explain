@@ -10,13 +10,12 @@ serviceModule.factory('elastic', ['esFactory', '$q', function (esFactory, $q) {
 
         this.obtainSlide = function(slideId, resultCallback) {
             var getObj = {"index":"slides","type":"slide"};
-            getObj.id = slideId; 
+            getObj.id = slideId;
             es.getSource(getObj).then(function(results){
                 resultCallback(results);
             },function(errors){
                 console.log(errors);
             });
-            resultCallback(slideId);
         };
 
         this.obtainPreviousSlide = function(slideId, resultCallback) {
@@ -105,6 +104,15 @@ serviceModule.factory('elastic', ['esFactory', '$q', function (esFactory, $q) {
             }, function(errors) {
                 console.log(errors);
             });
+        }
+
+        this.doAnalyze = function(index, analyzer, text, resultCallback) {
+            es.indices.analyze({"index":index, "analyzer":analyzer, "text": text})
+                .then(function(results) {
+                    resultCallback(results);
+                }, function(errors) {
+                    console.log(errors);
+                });
         }
 
         function createEsFactory() {
