@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="page-header">
+        <div class="page-header" ng-hide="slide.hidetitle">
             <h1>{{slide.title}} <small>{{slide.subTitle}}</small></h1>
         </div>
         <div ng-repeat="item in slide.content">
@@ -17,10 +17,21 @@
                 <div ng-switch-when="images">
                     <slider images="item.imgSources"/>
                 </div>
+                <div ng-switch-when="illustration">
+                    <img class="{{item.size}} {{item.location}}" ng-class="{'pull-right':item.pullright}" ng-src="img/{{item.imgSource}}"/>
+                </div>
+                <div ng-switch-when="quote" class="clearfix">                    
+                    <div>
+                        <div class="col-md-6 col-md-offset-4">
+                            <p class="text-right title">{{item.text}}</p>
+                            <p class="text-right author">{{item.author}}</p>
+                        </div>
+                    </div>
+                </div>
                 <div ng-switch-when="table">
-                    <table class="table">
+                    <table class="table {{item.class}}">
                         <tr ng-repeat="currentRow in item.rows">
-                            <td ng-repeat="currentCol in currentRow.cols track by $index">
+                            <td ng-class="{heading:((item.firstColHeading && $index==0) || currentRow.highlight)}" ng-repeat="currentCol in currentRow.cols track by $index" ng-attr-colspan="{{currentRow.colspan}}">
                                 {{currentCol}}
                             </td>
                         </tr>

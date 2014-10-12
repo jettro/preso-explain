@@ -27,6 +27,14 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys, $location) {
         }
     });
 
+    hotkeys.add({
+        combo: 'ctrl+s',
+        description: 'Open the search slide.',
+        callback: function() {
+            $location.path("/search");
+        }
+    });
+
     $scope.executeSearch = function(queryType,explain,searchText) {
         elastic.doMatchDescription(queryType, searchText, explain, function(data) {
             $scope.searchResults = data;

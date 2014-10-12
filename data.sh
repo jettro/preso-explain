@@ -35,13 +35,27 @@ curl -s -XPUT 'http://localhost:9200/slides' -d '
 curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"start",
+    "hidetitle":true,
 	"title":"Getting the right results",
 	"subTitle":"Jettro Coenradie",
 	"description":"This is the start slide for the presentation and should show the title.",
 	"content": [
 		{
-			"type":"image",
-			"imgSource":"homepage.jpg"
+			"type":"illustration",
+			"imgSource":"jfall-logo.png",
+			"size":"onethird",
+			"pullright":false
+		},
+		{
+			"type":"quote",
+			"text":"Returning the right results",
+			"author":"@jettroCoenradie"
+		},
+		{
+			"type":"illustration",
+			"imgSource":"luminis-logo.png",
+			"size":"onethird",
+			"pullright":false
 		}
 	],
 	"nextSlide":"aboutme"
@@ -56,6 +70,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"content": [
 		{
 			"type":"table",
+			"firstColHeading":true,
 			"rows": [
 				{
 					"cols": ["email","jettro.coenradie@luminis.eu"]
@@ -243,11 +258,11 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 				"text":"Sort by score (the default),"
 			},
 			{
-				"showme":false,
+				"showme":true,
 				"text":"Sort by date,"
 			},
 			{
-				"showme":false,
+				"showme":true,
 				"text":"Sort by analyzed fields,"
 			}
 			]
@@ -415,6 +430,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"content": [
 		{
 			"type":"table",
+			"firstColHeading":true,
 			"rows": [
 				{
 					"cols": ["queryNorm","Attempt to make different queries comparable."]
@@ -453,11 +469,14 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 		},
 		{
 			"type":"table",
+			"firstColHeading":true,
+			"class":"table-bordered table-hover",
 			"rows": [
 				{
 					"cols": ["","Doc 1","Doc 2", "Doc 3"]
 				},			
 				{
+					"highlight":true,
 					"cols": ["","one two three","two three", "three"]
 				},			
 				{
@@ -511,6 +530,8 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"content": [
 		{
 			"type":"table",
+			"firstColHeading":true,
+			"class":"table-bordered",
 			"rows": [
 				{
 					"cols": ["Character filters","Tidy up the string before tokenising."]
@@ -623,6 +644,329 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			"type":"executeget",
 			"executetype":"analyze",
 			"parameter":["onetwothree","camel","OneTwoThree"]
+		}
+	],
+	"nextSlide":"backtoexplain"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"backtoexplain",
+	"title":"Back to explain",
+	"subTitle":"recap single term",
+	"description":"In this slide we get back to the explain api, from the image with the real explain output we introduce a short notation.",
+	"content": [
+		{
+			"type":"notification",
+			"text":"GET /slides/_search?explain"
+		},
+		{
+			"type":"code",
+			"code": {
+			  "query": {
+			    "match": {
+			      "description": "basic"
+			    }
+			  }
+			}
+		},
+		{
+			"type":"image",
+			"imgSource":"backtoexplain.png"
+		},
+		{
+			"type":"table",
+			"class":"table-bordered",
+			"rows": [
+				{
+					"cols": ["description:basic","",""]
+				},			
+				{
+					"cols": ["","[*]",""]
+				},
+				{
+					"cols": ["","","tf / idf / fieldNorm"]
+				}
+			]
+		}
+	],
+	"nextSlide":"explain2terms"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"explain2terms",
+	"title":"Explain 2 terms",
+	"subTitle":"match with 2",
+	"description":"Now we are going to show the short notation for the explaination of a query with two terms due to a standard analyzer.",
+	"content": [
+		{
+			"type":"notification",
+			"text":"GET /slides/_search?explain"
+		},
+		{
+			"type":"code",
+			"code": {
+			  "query": {
+			    "match": {
+			      "description": "basic search"
+			    }
+			  }
+			}
+		},
+		{
+			"type":"table",
+			"class":"table-bordered",
+			"rows": [
+				{
+					"highlight":true,
+					"colspan":"3",
+					"cols":["structure of the score calculation"]
+				},
+				{
+					"cols": ["[*]","",""]
+				},			
+				{
+					"cols": ["","[+]",""]
+				},
+				{
+					"cols": ["","","description:basic"]
+				},
+				{
+					"cols": ["","coord (1/2)",""]
+				}
+			]
+		}
+	],
+	"nextSlide":"explain3terms"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"explain3terms",
+	"title":"Explain 3 terms",
+	"subTitle":"match with 3",
+	"description":"Now we are going to show the short notation for the explaination of a query with three terms due to a standard analyzer.",
+	"content": [
+		{
+			"type":"notification",
+			"text":"GET /slides/_search?explain"
+		},
+		{
+			"type":"code",
+			"code": {
+			  "query": {
+			    "match": {
+			      "description": "basic search elasticsearch"
+			    }
+			  }
+			}
+		},
+		{
+			"type":"table",
+			"class":"table-bordered",
+			"rows": [
+				{
+					"highlight":true,
+					"colspan":"3",
+					"cols":["structure of the score calculation"]
+				},
+				{
+					"cols": ["[*]","",""]
+				},			
+				{
+					"cols": ["","[+]",""]
+				},
+				{
+					"cols": ["","","description:basic"]
+				},
+				{
+					"cols": ["","","description:elasticsearch"]
+				},
+				{
+					"cols": ["","coord (2/3)",""]
+				}
+			]
+		}
+	],
+	"nextSlide":"explainbestof"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"explainbestof",
+	"title":"Explain multi_field",
+	"subTitle":"best_fields",
+	"description":"Show the effect of a multi_field query using the default best_fields type.",
+	"content": [
+		{
+			"type":"notification",
+			"text":"GET /slides/_search?explain"
+		},
+		{
+			"type":"code",
+			"code": {
+			  "query": {
+			    "multi_match": {
+			      "query": "basic query",
+			      "fields": ["title","description"],
+			      "type": "best_fields"
+			    }
+			  }
+			}
+		},
+		{
+			"type":"table",
+			"class":"table-bordered",
+			"rows": [
+				{
+					"highlight":true,
+					"colspan":"4",
+					"cols":["structure of the score calculation"]
+				},
+				{
+					"cols": ["[max_of]","","",""]
+				},			
+				{
+					"cols": ["","[+]","",""]
+				},
+				{
+					"cols": ["","","description:basic",""]
+				},
+				{
+					"cols": ["","","description:query",""]
+				},
+				{
+					"cols": ["","[*]","",""]
+				},
+				{
+					"cols": ["","","[+]",""]
+				},
+				{
+					"cols": ["","","","title:query"]
+				},
+				{
+					"cols": ["","","coord (1/2)",""]
+				}
+			]
+		}
+	],
+	"nextSlide":"explainmostfields"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"explainmostfields",
+	"title":"Explain multi_field",
+	"subTitle":"most_fields",
+	"description":"Show the effect of a multi_field query using the most_fields type.",
+	"content": [
+		{
+			"type":"notification",
+			"text":"GET /slides/_search?explain"
+		},
+		{
+			"type":"code",
+			"code": {
+			  "query": {
+			    "multi_match": {
+			      "query": "basic query",
+			      "fields": ["title","description"],
+			      "type": "most_fields"
+			    }
+			  }
+			}
+		},
+		{
+			"type":"table",
+			"class":"table-bordered",
+			"rows": [
+				{
+					"highlight":true,
+					"colspan":"4",
+					"cols":["structure of the score calculation"]
+				},
+				{
+					"cols": ["[sum_of]","","",""]
+				},			
+				{
+					"cols": ["","[+]","",""]
+				},
+				{
+					"cols": ["","","description:basic",""]
+				},
+				{
+					"cols": ["","","description:query",""]
+				},
+				{
+					"cols": ["","[*]","",""]
+				},
+				{
+					"cols": ["","","[+]",""]
+				},
+				{
+					"cols": ["","","","title:query"]
+				},
+				{
+					"cols": ["","","coord (1/2)",""]
+				}
+			]
+		}
+	],
+	"nextSlide":"explaincrossfields"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"explaincrossfields",
+	"title":"Explain multi_field",
+	"subTitle":"cross_fields",
+	"description":"Show the effect of a multi_field query using the cross_fields type.",
+	"content": [
+		{
+			"type":"notification",
+			"text":"GET /slides/_search?explain"
+		},
+		{
+			"type":"code",
+			"code": {
+			  "query": {
+			    "multi_match": {
+			      "query": "basic query",
+			      "fields": ["title","description"],
+			      "type": "cross_fields"
+			    }
+			  }
+			}
+		},
+		{
+			"type":"table",
+			"class":"table-bordered",
+			"rows": [
+				{
+					"highlight":true,
+					"colspan":"3",
+					"cols":["structure of the score calculation"]
+				},
+				{
+					"cols": ["[sum_of]","",""]
+				},			
+				{
+					"cols": ["","[max_of]",""]
+				},
+				{
+					"cols": ["","","description:basic"]
+				},
+				{
+					"cols": ["","[max_of]",""]
+				},
+				{
+					"cols": ["","","description:query"]
+				},
+				{
+					"cols": ["","","title:query"]
+				}
+			]
 		}
 	],
 	"nextSlide":"start"
