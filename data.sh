@@ -676,8 +676,13 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 		},
 		{
 			"type":"table",
-			"class":"table-bordered",
+			"class":"table-bordered table-hover",
 			"rows": [
+				{
+					"highlight":true,
+					"colspan":"3",
+					"cols":["structure of the score calculation"]
+				},
 				{
 					"cols": ["description:basic","",""]
 				},			
@@ -716,7 +721,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 		},
 		{
 			"type":"table",
-			"class":"table-bordered",
+			"class":"table-bordered table-hover",
 			"rows": [
 				{
 					"highlight":true,
@@ -764,7 +769,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 		},
 		{
 			"type":"table",
-			"class":"table-bordered",
+			"class":"table-bordered table-hover",
 			"rows": [
 				{
 					"highlight":true,
@@ -817,7 +822,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 		},
 		{
 			"type":"table",
-			"class":"table-bordered",
+			"class":"table-bordered table-hover",
 			"rows": [
 				{
 					"highlight":true,
@@ -879,7 +884,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 		},
 		{
 			"type":"table",
-			"class":"table-bordered",
+			"class":"table-bordered table-hover",
 			"rows": [
 				{
 					"highlight":true,
@@ -941,7 +946,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 		},
 		{
 			"type":"table",
-			"class":"table-bordered",
+			"class":"table-bordered table-hover",
 			"rows": [
 				{
 					"highlight":true,
