@@ -974,6 +974,111 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			]
 		}
 	],
-	"nextSlide":"start"
+	"nextSlide":"explaindismax"
 }'
 
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"explaindismax",
+	"title":"Explain dis_max query",
+	"subTitle":"use tie breaker",
+	"description":"Show the effect of a dis_max query which is a balance between cross_fields and best matching field.",
+	"content": [
+		{
+			"type":"notification",
+			"text":"GET /slides/_search?explain"
+		},
+		{
+			"type":"code",
+			"code": {
+			  "query": {
+			    "dis_max": {
+			      "tie_breaker": 0.7,
+			      "boost": 1.2,
+			      "queries": [
+			        {
+			          "match": {
+			            "description": "basic query"
+			          }
+			        },
+			        {
+			          "match": {
+			            "title": "basic query"
+			          }
+			        }
+			        ]
+			    }
+			  }
+			}
+		},
+		{
+			"type":"table",
+			"class":"table-bordered table-hover",
+			"rows": [
+				{
+					"highlight":true,
+					"colspan":"4",
+					"cols":["structure of the score calculation"]
+				},
+				{	
+					"colspan":"2",
+					"cols": ["[max_of + 0.7 [*] others]","",""]
+				},			
+				{
+					"cols": ["","[+]","",""]
+				},
+				{
+					"cols": ["","","description:basic",""]
+				},
+				{
+					"cols": ["","","description:query",""]
+				},
+				{
+					"cols": ["","[*]","",""]
+				},
+				{
+					"cols": ["","","[+]",""]
+				},
+				{
+					"cols": ["","","","title:query"]
+				},
+				{
+					"cols": ["","","coord (1/2)",""]
+				}				
+			]
+		}
+	],
+	"nextSlide":"multipletermsandfields"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"multipletermsandfields",
+	"title":"Multile terms and fields",
+	"subTitle":"summary",
+	"description":"Explain the different options we have for multi field queries and explain the differences when calculating the score.",
+	"content": [
+		{
+			"type":"list",
+			"items": [
+				{
+					"showme":true,
+					"text":"Best field returns the field with the highest score,"
+				},
+				{
+					"showme":false,
+					"text":"Most fields adds the scores for the different fields,"
+				},
+				{
+					"showme":false,
+					"text":"Cross fields treets all field as one big field and add maximum score for term,"
+				},
+				{
+					"showme":false,
+					"text":"Dis max takes the best field and adds a part of the score of other fields"
+				}
+			]
+		}
+	],
+	"nextSlide":"start"
+}'
