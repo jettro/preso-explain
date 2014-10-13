@@ -2,7 +2,7 @@
     <div class="col-md-12">
     	<h1>Summary</h1>
     	<div ng-repeat="item in searchResults track by $index">
-    		<h2>{{item.title}}</h2>
+    		<h2>{{$index + 1}}: {{item.title}}</h2>
     		<span class="subtitle">{{item.subTitle}}</span><span class="btn btn-link" ng-click="openSlide(item.slideId)">open</span>
     		<p>{{item.description}}</p>
     	</div>

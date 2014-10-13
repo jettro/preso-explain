@@ -382,21 +382,74 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			"items": [
 				{
 					"showme":true,
-					"text":"Score is calculated for matching documents,"
+					"text":"Score is calculated for matching documents (Boolean Model),"
 				},
 				{
 					"showme":false,
-					"text":"Score represents how similar the search terms and the document terms are,"
+					"text":"Score represents similarity between search and document terms,"
 				},
 				{
 					"showme":false,
-					"text":"Default for Lucene is comination of Boolean Model, TF/IDF and the Vector Space Model,"
+					"text":"Lucene uses enhanced TF/IDF (coordination factor and field length),"
 				},
 				{
 					"showme":false,
-					"text":"Other algorithms are available: BM25"
+					"text":"Other algorithms can be used: Okapi BM25"
 				}
 			]
+		}
+	],
+	"nextSlide":"lucenebooleanmodel"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"lucenebooleanmodel",
+	"title":"Boolean model",
+	"subTitle":"must, must_not and should",
+	"description":"In this slide we are going to explain the transformation of all queries into a bool query.",
+	"content": [
+		{
+			"type":"code",
+			"code": {
+			  "query": {
+			    "match": {
+			      "description": "basic search elasticsearch"
+			    }
+			  }
+			}
+		},
+		{
+			"type":"code",
+			"code": {
+			  "query": {
+			    "bool": {
+			      "should": [
+			        {
+			          "term": {
+			            "description": {
+			              "value": "basic"
+			            }
+			          }
+			        },
+			        {
+			          "term": {
+			            "description": {
+			              "value": "search"
+			            }
+			          }
+			        },
+			        {
+			          "term": {
+			            "description": {
+			              "value": "elasticsearch"
+			            }
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}			
 		}
 	],
 	"nextSlide":"lucenesimilarityformula"
@@ -1082,3 +1135,12 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	],
 	"nextSlide":"start"
 }'
+
+# Some ideas for next slides
+# Think about OR/AND operator, the must and must_not clauses as well as the should clauses.
+# Don't forget the tie breaker and of course the boost, what is the impact to score
+# What about signals, there are a lot but what do we mean with it, how does it infleunce the score.
+# Check, I think the signals is one of the should queries that can have multipel signals.
+# Have a look at the function_score query (dates and popularity)
+# Create a reference section, also to the elasticsearch book
+# I think a last slide that explain that tuning the results is cool, but often you do not really need it. Use instrumentation to check what people are doing with your search results.
