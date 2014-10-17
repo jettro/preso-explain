@@ -38,7 +38,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
     "hidetitle":true,
 	"title":"Getting the right results",
 	"subTitle":"Jettro Coenradie",
-	"description":"This is the start slide for the presentation and should show the title.",
+	"description":"This presentation is about getting the right results from elasticsearch. You will get an introduction into different kind of queries that you can use, the impact of analysers on results and we take a deep dive into the explain functionality. Using the explain functionality you can find out why one document is matching better than another.",
 	"content": [
 		{
 			"type":"illustration",
@@ -66,7 +66,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
   "slideId":"aboutme",
 	"title":"About me",
 	"subTitle":"how to contact me",
-	"description":"This slide shows some information about me. It gives you my twitter handle, my linkedin account and my github repository.",
+	"description":"My name is Jettro Coenradie, I am the follow of Luminis Amsterdam. My specialty is search solutions and specifically elasticsearch. You can follow me on twitter, linkedin and my code is on github.",
 	"content": [
 		{
 			"type":"table",
@@ -98,18 +98,30 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
   "slideId":"whatiselastic",
 	"title":"What is elasticsearch?",
 	"subTitle":"more than search",
-	"description":"Start introducing elasticsearch, explain the vey basic things that need to be known.",
+	"description":"Start introducing elasticsearch, explain the very basic things that need to be known.",
 	"content": [
 		{
 			"type":"list",
 			"items": [
 				{
 					"showme":true,
-					"text":"Scalable search solution"
+					"text":"Scalable search solution,"
 				},
 				{
 					"showme":false,
-					"text":"Schemaless, yeah right"
+					"text":"Find similar texts to provided words,"
+				},
+				{
+					"showme":false,
+					"text":"Filter documents by exact matches,"
+				},
+				{
+					"showme":false,
+					"text":"Create buckets of data by some condition,"
+				},
+				{
+					"showme":false,
+					"text":"Build using java on top of lucene,"
 				}
 			]
 		}
@@ -122,15 +134,15 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
   "slideId":"elasticlucene",
 	"title":"Elasticsearch and lucene",
 	"subTitle":"cluster, index, shards, lucene",
-	"description":"In here I want to explain the different concepts of elasticsearch.",
+	"description":"In here I want to explain the different components of an elasticsearch cluster. I am showing images containing the structure of these components. A cluster contains multiple nodes. Each nodes contains shards of multiple indices. Each shard is a lucene index.",
 	"content": [
 		{
 			"type":"images",
 			"imgSources": [
-			  {"src":"elasticlucene1.png","showme":true},
-			  {"src":"elasticlucene2.png","showme":true},
-			  {"src":"elasticlucene3.png","showme":true},
-			  {"src":"elasticlucene4.png","showme":true}
+			  {"src":"elasticlucene-1.jpg","showme":true},
+			  {"src":"elasticlucene-2.jpg","showme":true},
+			  {"src":"elasticlucene-3.jpg","showme":true},
+			  {"src":"elasticlucene-4.jpg","showme":true}
 			]
 		}
 	],
@@ -145,24 +157,11 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"description":"In this slide I want to explain what it means to execute a query against elasticsearch.",
 	"content": [
 		{
-			"type":"list",
-			"items": [
-			{
-				"showme":true,
-				"text":"Use the REST api,"
-			},
-			{
-				"showme":false,
-				"text":"Use one of the drivers,"
-			},
-			{
-				"showme":false,
-				"text":"A lot of different queries,"
-			},
-			{
-				"showme":false,
-				"text":"Use query, filter, aggregations, highlighting, and ..."
-			}
+			"type":"images",
+			"imgSources": [
+			  {"src":"executingquery-1.jpg","showme":true},
+			  {"src":"executingquery-2.jpg","showme":true},
+			  {"src":"executingquery-3.jpg","showme":true}
 			]
 		}
 	],
@@ -1133,14 +1132,104 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			]
 		}
 	],
+	"nextSlide":"boosting"
+}'
+
+# Denk toch dat ik deze slide wil opbreken, misschien plaatjes maken met deel van de score
+# en deel van de query of zo. Vind het nog lastig.
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"boosting",
+	"title":"Boosting",
+	"subTitle":"the basics",
+	"description":"In match queries you can apply a boost to a certain field. Important to notice is that you cannot really change the output of explain. It is only the score that changes.",
+	"content": [
+		{
+			"type":"code",
+			"code": {
+			  "query": {
+			    "multi_match": {
+			      "query": "basic query",
+			      "fields": ["title^5","description"],
+			      "type": "best_fields"
+			    }
+			  }
+			}
+		},
+		{
+			"type":"list",
+			"items": [
+				{
+					"showme":true,
+					"text":"Applied a boost of 5 to the title field,"
+				},
+				{
+					"showme":false,
+					"text":"score: with boost 0.3271296, without 0.71368325,"
+				},
+				{
+					"showme":false,
+					"text":"Not easy to detect, not visible as a product_of for instance,"
+				},
+				{
+					"showme":false,
+					"text":"We have to look at the queryNorm of description"
+				}
+			]
+		}
+	],
+	"nextSlide":"questions"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"questions",
+	"title":"Questions",
+	"subTitle":"I am here the whole day",
+	"description":"If you have a question now or later.",
+	"content": [
+		{
+			"type":"notification",
+			"text":"Do you have questions?"
+		}
+	],
+	"nextSlide":"boolquery"
+}'
+
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"boolquery",
+	"title":"Bool query",
+	"subTitle":"the base for all queries",
+	"description":"Introduce the bool query as the base query to all other queries. In the end all queries can be written as a bool query. Explain the difference between operator AND/OR.",
+	"content": [
+		{
+			"type":"code",
+			"code": {
+			  "query": {
+			    "bool": {
+			      "must": [
+			        {}
+			      ],
+			      "must_not": [
+			        {}
+			      ],
+			      "should": [
+			        {}
+			      ]
+			    }
+			  }
+			}
+		}
+	],
 	"nextSlide":"start"
 }'
 
 # Some ideas for next slides
-# Think about OR/AND operator, the must and must_not clauses as well as the should clauses.
 # Don't forget the tie breaker and of course the boost, what is the impact to score
 # What about signals, there are a lot but what do we mean with it, how does it infleunce the score.
-# Check, I think the signals is one of the should queries that can have multipel signals.
+# Check, I think the signals is one of the should queries that can have multiple signals.
 # Have a look at the function_score query (dates and popularity)
 # Create a reference section, also to the elasticsearch book
 # I think a last slide that explain that tuning the results is cool, but often you do not really need it. Use instrumentation to check what people are doing with your search results.
