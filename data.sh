@@ -165,6 +165,28 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			]
 		}
 	],
+	"nextSlide":"executingqueryshards"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"executingqueryshards",
+	"title":"Executing a query",
+	"subTitle":"calling all shards",
+	"description":"In this slide I am explaining what happens when you execute a query. You will learn that we first execute a query that is send to all shards by the client. The results are gathered and merged and if the right set of documents is created the actual required documents are fetched.",
+	"content": [
+		{
+			"type":"images",
+			"imgSources": [
+			  {"src":"executingqueryshards-1.jpg","showme":true},
+			  {"src":"executingqueryshards-2.jpg","showme":true},
+			  {"src":"executingqueryshards-3.jpg","showme":true},
+			  {"src":"executingqueryshards-4.jpg","showme":true},
+			  {"src":"executingqueryshards-5.jpg","showme":true},
+			  {"src":"executingqueryshards-6.jpg","showme":true}
+			]
+		}
+	],
 	"nextSlide":"showcurl"
 }'
 
@@ -191,24 +213,13 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"description":"Some examples of other query tools that are available.",
 	"content": [
 		{
-			"type":"list",
-			"items": [
-			{
-				"showme":true,
-				"text":"Elasticsearch Marvel Sense,"
-			},
-			{
-				"showme":false,
-				"text":"Plugins: Elasticsearch gui, Head, Kopf"
-			},
-			{
-				"showme":false,
-				"text":"Java Driver and other language drivers"
-			},
-			{
-				"showme":false,
-				"text":"Any rest client"
-			}
+			"type":"images",
+			"imgSources": [
+			  {"src":"otherquerytool-1.jpg","showme":true},
+			  {"src":"otherquerytool-2.jpg","showme":true},
+			  {"src":"otherquerytool-3.jpg","showme":true},
+			  {"src":"otherquerytool-4.jpg","showme":true},
+			  {"src":"otherquerytool-5.jpg","showme":true}
 			]
 		}
 	],
