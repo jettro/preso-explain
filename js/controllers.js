@@ -13,7 +13,7 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys, $location) {
     hotkeys.add({
         combo: 'down',
         description: 'Go to the next slide.',
-        callback: function() {
+        callback: function(event,hotkey) {
             var path = $location.path().replace($scope.slide.slideId,$scope.slide.nextSlide);
             $location.path(path);
         }
@@ -22,7 +22,7 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys, $location) {
     hotkeys.add({
         combo: 'up',
         description: 'Go to the previous slide.',
-        callback: function() {
+        callback: function(event,hotkey) {
             doShowPreviousSlide($scope.slide.slideId);
         }
     });
@@ -30,8 +30,30 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys, $location) {
     hotkeys.add({
         combo: 'ctrl+s',
         description: 'Open the search slide.',
-        callback: function() {
+        callback: function(event,hotkey) {
             $location.path("/search");
+        }
+    });
+
+    hotkeys.add({
+        combo: 'ctrl+l',
+        description: 'Open the last slide.',
+        callback: function() {
+        elastic.obtainPreviousSlide('start', function(data) {
+            if (data) {
+                var path = $location.path().replace($scope.slide.slideId,data.slideId);
+                $location.path(path);
+            }
+        });
+        }
+    });
+
+    hotkeys.add({
+        combo: 'ctrl+f',
+        description: 'Open the first slide.',
+        callback: function() {
+            var path = $location.path().replace($scope.slide.slideId,'start');
+            $location.path(path);            
         }
     });
 
@@ -62,13 +84,6 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys, $location) {
             });
         }
     }
-
-    // $scope.showNextItem = function(items, currentItem) {
-    //     console.log("JA HOOR IK WORDT GEBRUIKT");
-    //     if (currentItem < items.length) {
-    //         items[currentItem+1].visible = true;
-    //     }
-    // }
 
     function doShowSlide(slideId) {
         $scope.searchResults = null;

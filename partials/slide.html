@@ -74,6 +74,7 @@
                 <div ng-switch-when="code">
                     <pre class="code">{{item.code | json}}</pre>
                 </div>
+                <div ng-switch-when="text">{{item.text}}</div>
                 <div ng-switch-when="executeget">
                     <button class="btn btn-default" type="button" ng-click="executeQuery(item.executetype,item.parameter)">Execute!</button>
                     <div ng-show="searchResults">

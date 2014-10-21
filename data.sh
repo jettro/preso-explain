@@ -1147,14 +1147,12 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"boosting"
 }'
 
-# Denk toch dat ik deze slide wil opbreken, misschien plaatjes maken met deel van de score
-# en deel van de query of zo. Vind het nog lastig.
 curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"boosting",
 	"title":"Boosting",
 	"subTitle":"the basics",
-	"description":"In match queries you can apply a boost to a certain field. Important to notice is that you cannot really change the output of explain. It is only the score that changes.",
+	"description":"In match queries you can apply a boost to a certain field. Important to notice is that the structure of the output of explain is not changing using this kind of boost. It is only the score that changes, the boost is reflected within the query norm of the explain.",
 	"content": [
 		{
 			"type":"code",
@@ -1162,32 +1160,78 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			  "query": {
 			    "multi_match": {
 			      "query": "basic query",
-			      "fields": ["title^5","description"],
-			      "type": "best_fields"
+			      "fields": ["title^5","description"]
 			    }
 			  }
 			}
 		},
 		{
-			"type":"list",
-			"items": [
+			"type":"table",
+			"firstColHeading":true,
+			"rows":[
 				{
-					"showme":true,
-					"text":"Applied a boost of 5 to the title field,"
+					"highlight":true,
+					"cols":["","No boost","Title boost"]
 				},
 				{
-					"showme":false,
-					"text":"score: with boost 0.3271296, without 0.71368325,"
+					"cols":["_score","0.729","0.312"]
 				},
 				{
-					"showme":false,
-					"text":"Not easy to detect, not visible as a product_of for instance,"
+					"cols":["description:basic","0.533","0.107"]
 				},
 				{
-					"showme":false,
-					"text":"We have to look at the queryNorm of description"
+					"cols":["description:query","0.195","0.0391"]
+				},
+				{
+					"cols":["description query norm","0.197","0.0394"]
+				},
+				{
+					"cols":["title:query","0.624","0.624"]
+				},
+				{
+					"cols":["coord (1/2)","0.5","0.5"]
 				}
 			]
+		}
+
+	],
+	"nextSlide":"boostingquery"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"boostingquery",
+	"title":"Boosting query",
+	"subTitle":"match with negative impact",
+	"description":"The most basic boosting, is boosting on a field basis. Sometimes you have other boosting requirements. One thing could be to give a negative boost to some term. Of course you can use the must_not in a bool query but this is different. In that situation you do not have a match, but we want a match just with a lower score if a certain term is available. Here we show that the negative term query adds no score but does give a penalty to the complete score.",
+	"content": [
+		{
+			"type":"code",
+			"code": {
+			  "query": {
+			    "boosting": {
+			      "positive": {
+			        "term": {
+			          "description": {
+			            "value": "basic"
+			          }
+			        }
+			      },
+			      "negative": {
+			        "term": {
+			          "description": {
+			            "value": "query"
+			          }
+			        }
+			      },
+			      "negative_boost": 0.2
+			    }
+			  }
+			}
+		},
+		{
+			"type":"image",
+			"imgSource":"boostingquery.jpg"
 		}
 	],
 	"nextSlide":"questions"
@@ -1198,14 +1242,28 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
   "slideId":"questions",
 	"title":"Questions",
 	"subTitle":"I am here the whole day",
-	"description":"If you have a question now or later.",
+	"description":"Place holder sheet that can be used during the questions moment.",
 	"content": [
 		{
 			"type":"notification",
 			"text":"Do you have questions?"
+		},
+		{
+			"type":"illustration",
+			"imgSource":"question.jpg",
+			"size":"onethird",
+			"pullright":true
+		},
+		{
+			"type":"text",
+			"text":"@jettroCoenradie"
+		},
+		{
+			"type":"text",
+			"text":"https://github.com/jettro/preso-explain"
 		}
 	],
-	"nextSlide":"boolquery"
+	"nextSlide":"start"
 }'
 
 
@@ -1235,7 +1293,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			}
 		}
 	],
-	"nextSlide":"start"
+	"nextSlide":"nothing"
 }'
 
 # Some ideas for next slides
