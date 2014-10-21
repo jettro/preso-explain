@@ -15,7 +15,7 @@
                     <img class="complete" ng-src="img/{{item.imgSource}}"/>
                 </div>
                 <div ng-switch-when="images">
-                    <slider images="item.imgSources"/>
+                    <slider images="item.imgSources" hideProgress="item.hideProgress"/>
                 </div>
                 <div ng-switch-when="illustration">
                     <img class="{{item.size}} {{item.location}}" ng-class="{'pull-right':item.pullright}" ng-src="img/{{item.imgSource}}"/>
@@ -38,7 +38,7 @@
                     </table>
                 </div>
                 <div ng-switch-when="list">
-                    <bullits listitems="item.items"/>
+                    <bullits listitems="item.items" hideprogress="item.hideprogress"/>
                 </div>
                 <div ng-switch-when="query">
                     <pre class="code">{{item.query | json}}</pre>

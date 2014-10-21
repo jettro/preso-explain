@@ -63,11 +63,12 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys, $location) {
         }
     }
 
-    $scope.showNextItem = function(items, currentItem) {
-        if (currentItem < items.length) {
-            items[currentItem+1].visible = true;
-        }
-    }
+    // $scope.showNextItem = function(items, currentItem) {
+    //     console.log("JA HOOR IK WORDT GEBRUIKT");
+    //     if (currentItem < items.length) {
+    //         items[currentItem+1].visible = true;
+    //     }
+    // }
 
     function doShowSlide(slideId) {
         $scope.searchResults = null;

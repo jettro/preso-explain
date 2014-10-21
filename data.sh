@@ -262,6 +262,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"content": [
 		{
 			"type":"list",
+			"hideprogress":true,
 			"items": [
 			  {
 				"showme":true,
@@ -1244,3 +1245,4 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 # Have a look at the function_score query (dates and popularity)
 # Create a reference section, also to the elasticsearch book
 # I think a last slide that explain that tuning the results is cool, but often you do not really need it. Use instrumentation to check what people are doing with your search results.
+# What is the impact for explain using an ngram query.

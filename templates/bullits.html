@@ -1,6 +1,11 @@
 <div>
-	<ul class="bullits">
-		<li ng-repeat="listItem in listitems" ng-show="listItem.showme" hotkey="{right:nextItem}">{{listItem.text}}</li>
-	</ul>
+	<div class="row" ng-hide="hideprogress">
+		<div class="col-sm-1 col-sm-offset-11"><progressbar value="listProgress" type="info"></progressbar></div>	
+	</div>
+	<div class="row">
+		<ul class="bullits">
+			<li ng-repeat="listItem in listitems" ng-show="listItem.showme" hotkey="{right:nextItem}">{{listItem.text}}</li>
+		</ul>
+	</div>
 </div>
 

@@ -1,4 +1,8 @@
 <div class="slider">
+	<div class="row" ng-hide="hideProgress">
+		<div class="col-sm-1 col-sm-offset-11"><progressbar value="listProgress" type="info"></progressbar></div>	
+	</div>
+
   <div class="slide" ng-repeat="image in images" ng-show="image.showme" hotkey="{right:next}">
     <img ng-src="img/{{image.src}}"/>
   </div>
