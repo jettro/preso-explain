@@ -58,8 +58,61 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			"pullright":false
 		}
 	],
+	"nextSlide":"rightresults"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"rightresults",
+	"title":"Right results",
+	"subTitle":"how to explain",
+	"description":"Introduce the question of explaining you have found the right results. Ask the question if they have kids. Or parents they need explain something about the newest gatgets.",
+	"content": [
+		{
+			"type":"quote",
+			"text":"How do you explain you have the right results?"
+		}
+	],
+	"nextSlide":"rightresultskidseyes"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"rightresultskidseyes",
+	"title":"Right results",
+	"subTitle":"to your kids",
+	"description":"Introduce the not so smart answers to questions about the right results.",
+	"content": [
+		{
+			"type":"list",
+			"items":[
+				{
+					"showme":"true",
+					"text":"Just because they are!"
+				},
+				{
+					"showme":"false",
+					"text":"That is to difficult to explain!"
+				},
+				{
+					"showme":"false",
+					"text":"Why do you want to know that?"
+				},
+				{
+					"showme":"false",
+					"text":"Or the easiest one,"
+				},
+				{
+					"showme":"false",
+					"text":"Do you want a candy?"
+				}
+			]
+		}
+	],
 	"nextSlide":"aboutme"
 }'
+
+
 
 curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 {
