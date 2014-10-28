@@ -38,7 +38,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
     "hidetitle":true,
 	"title":"Getting the right results",
 	"subTitle":"Jettro Coenradie",
-	"description":"This presentation is about getting the right results from elasticsearch. You will get an introduction into different kind of queries that you can use, the impact of analysers on results and we take a deep dive into the explain functionality. Using the explain functionality you can find out why one document is matching better than another.",
+	"description":"This presentation is about getting the right results from elasticsearch. There are a lot of things that you can do to improve the results you get back from elasticsearch. You will get an introduction into different kind of queries that you can use, the impact of analysers on results and we take a deep dive into the explain functionality. Using the explain functionality you can find out why one document is matching better than another.",
 	"content": [
 		{
 			"type":"illustration",
@@ -58,61 +58,8 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			"pullright":false
 		}
 	],
-	"nextSlide":"rightresults"
-}'
-
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
-{
-  "slideId":"rightresults",
-	"title":"Right results",
-	"subTitle":"how to explain",
-	"description":"Introduce the question of explaining you have found the right results. Ask the question if they have kids. Or parents they need explain something about the newest gatgets.",
-	"content": [
-		{
-			"type":"quote",
-			"text":"How do you explain you have the right results?"
-		}
-	],
-	"nextSlide":"rightresultskidseyes"
-}'
-
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
-{
-  "slideId":"rightresultskidseyes",
-	"title":"Right results",
-	"subTitle":"to your kids",
-	"description":"Introduce the not so smart answers to questions about the right results.",
-	"content": [
-		{
-			"type":"list",
-			"items":[
-				{
-					"showme":"true",
-					"text":"Just because they are!"
-				},
-				{
-					"showme":"false",
-					"text":"That is to difficult to explain!"
-				},
-				{
-					"showme":"false",
-					"text":"Why do you want to know that?"
-				},
-				{
-					"showme":"false",
-					"text":"Or the easiest one,"
-				},
-				{
-					"showme":"false",
-					"text":"Do you want a candy?"
-				}
-			]
-		}
-	],
 	"nextSlide":"aboutme"
 }'
-
-
 
 curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 {
@@ -143,6 +90,57 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			]
 		}
 	],
+	"nextSlide":"rightresults"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"rightresults",
+	"title":"The right results",
+	"subTitle":"what are they?",
+	"description":"Introduce the question of explaining you have found the right results. It is one of those hard questions that feels like your kid is asking you. You do not really want to asnwer the question because you know the next question is going to be even harder.",
+	"content": [
+		{
+			"type":"quote",
+			"text":"How would you explain The right results?"
+		}
+	],
+	"nextSlide":"rightresultskidseyes"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"rightresultskidseyes",
+	"title":"What are the right results",
+	"subTitle":"answer to your kids",
+	"description":"These are answers you would give to your kids if you do not feel like answering the question at all.",
+	"content": [
+		{
+			"type":"list",
+			"items":[
+				{
+					"showme":"true",
+					"text":"Just because they are!"
+				},
+				{
+					"showme":"false",
+					"text":"That is to difficult to explain!"
+				},
+				{
+					"showme":"false",
+					"text":"Why do you want to know that?"
+				},
+				{
+					"showme":"false",
+					"text":"Or the easiest one,"
+				},
+				{
+					"showme":"false",
+					"text":"Do you want a candy?"
+				}
+			]
+		}
+	],
 	"nextSlide":"whatiselastic"
 }'
 
@@ -151,31 +149,17 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
   "slideId":"whatiselastic",
 	"title":"What is elasticsearch?",
 	"subTitle":"more than search",
-	"description":"Start introducing elasticsearch, explain the very basic things that need to be known.",
+	"description":"Before we can start explaining why elasticsearch returns the results that it does, you first need to know more about what elasticsearch is, what it can do for you and some terminology used thoughtout the remainder of the presentation.",
 	"content": [
 		{
-			"type":"list",
-			"items": [
-				{
-					"showme":true,
-					"text":"Scalable search solution,"
-				},
-				{
-					"showme":false,
-					"text":"Find similar texts to provided words,"
-				},
-				{
-					"showme":false,
-					"text":"Filter documents by exact matches,"
-				},
-				{
-					"showme":false,
-					"text":"Create buckets of data by some condition,"
-				},
-				{
-					"showme":false,
-					"text":"Build using java on top of lucene,"
-				}
+			"type":"images",
+			"imgSources": [
+			  {"src":"introelastic-1.jpg","showme":true},
+			  {"src":"introelastic-2.jpg","showme":true},
+			  {"src":"introelastic-3.jpg","showme":true},
+			  {"src":"introelastic-4.jpg","showme":true},
+			  {"src":"introelastic-5.jpg","showme":true},
+			  {"src":"introelastic-6.jpg","showme":true}
 			]
 		}
 	],
