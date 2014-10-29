@@ -51,7 +51,18 @@
                     </div><!-- /input-group -->
                     </form>
                     <div ng-show="searchResults">
-                        <pre class="code">{{searchResults | json}}</pre>
+                        <pre class="code" ng-hide="item.niceResults">{{searchResults | json}}</pre>
+                        <div ng-show="item.niceResults">
+                            <div ng-repeat="result in searchResults.hits.hits">
+                                <div>
+                                    <h3>{{result._source.title}}({{result._score}})</h3>
+                                    <span>{{result._source.description}}</span>
+                                </div>
+                            </div>
+                            <div ng-if="searchResults.hits.total == 0">
+                                <span class="label label-warning">No results found</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div ng-switch-when="query123">

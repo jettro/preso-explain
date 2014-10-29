@@ -149,7 +149,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
   "slideId":"whatiselastic",
 	"title":"What is elasticsearch?",
 	"subTitle":"more than search",
-	"description":"Before we can start explaining why elasticsearch returns the results that it does, you first need to know more about what elasticsearch is, what it can do for you and some terminology used thoughtout the remainder of the presentation.",
+	"description":"Before we can start explaining why elasticsearch returns the results that it does, you first need to know more about what elasticsearch is, what it can do for you and some terminology used thoughtout the remainder of the presentation. You will learn about structured and unstructured data, data sources and how we use the data.",
 	"content": [
 		{
 			"type":"images",
@@ -163,8 +163,39 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			]
 		}
 	],
+	"nextSlide":"introlucene"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"introlucene",
+	"title":"Storing content",
+	"subTitle":"what we need Lucene for",
+	"description":"Introduce lucene, analyzers, terms and the inverted index.",
+	"content": [
+		{
+			"type":"list",
+			"hideprogress":false,
+			"items": [
+			  {
+				"showme":true,
+				"text":"Use analyzer to create terms,"
+			},
+			{
+				"showme":false,
+				"text":"Store terms in inverted index,"
+			},
+			{
+				"showme":false,
+				"text":"Search fast through inverted index."
+			}
+			]
+		}
+	],
 	"nextSlide":"elasticlucene"
 }'
+
+
 
 curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 {
@@ -278,6 +309,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			"type":"query",
 			"queryType":"match",
 			"explain":false,
+			"niceResults":true,
 			"query": {
 				"query": {
 					"match": {
@@ -323,6 +355,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			"type":"query",
 			"queryType":"sort",
 			"explain":false,
+			"niceResults":true,
 			"query": {
 				"query": {
 					"match": {
