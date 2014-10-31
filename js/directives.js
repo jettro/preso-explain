@@ -38,7 +38,8 @@ directive('bullits', function($timeout) {
     replace: true,
     scope: {
       hideprogress: '=',
-      listitems: '='
+      listitems: '=',
+      format: '='
     },
     link: function(scope, elem, attrs) {
       scope.currentIndex = 0;

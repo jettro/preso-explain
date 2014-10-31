@@ -89,6 +89,11 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys, $location) {
         $scope.searchResults = null;
         $scope.searchOperator = "or";
         elastic.obtainSlide(slideId, function(data) {
+            if (data.searchText) {
+                $scope.searchText = data.searchText;
+            } else {
+                $scope.searchText = "basic";
+            }
             $scope.slide = data;
         });
     }

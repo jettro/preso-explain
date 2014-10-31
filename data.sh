@@ -98,46 +98,28 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
   "slideId":"rightresults",
 	"title":"The right results",
 	"subTitle":"what are they?",
-	"description":"Introduce the question of explaining you have found the right results. It is one of those hard questions that feels like your kid is asking you. You do not really want to asnwer the question because you know the next question is going to be even harder.",
+	"description":"How would you define the right results. Of course a lot depends on the context of the asked question. Like always you need to find the term on wikipedia to get your first explanation.",
 	"content": [
 		{
 			"type":"quote",
 			"text":"How would you explain The right results?"
 		}
 	],
-	"nextSlide":"rightresultskidseyes"
+	"nextSlide":"rightresultswikipedia"
 }'
 
 curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 {
-  "slideId":"rightresultskidseyes",
-	"title":"What are the right results",
-	"subTitle":"answer to your kids",
-	"description":"These are answers you would give to your kids if you do not feel like answering the question at all.",
+  "slideId":"rightresultswikipedia",
+	"title":"The right results",
+	"subTitle":"according to wikipedia",
+	"description":"Every presentation has to start with wikipedia. To bad there is no page for the right results, but there is an interesting link to be found. This shows an excerpt from the toyota way. The right process will produce the right results. This is also true for returning the right results using elasticsearch. During this presentation the right process will become clear.",
 	"content": [
 		{
-			"type":"list",
-			"items":[
-				{
-					"showme":"true",
-					"text":"Just because they are!"
-				},
-				{
-					"showme":"false",
-					"text":"That is to difficult to explain!"
-				},
-				{
-					"showme":"false",
-					"text":"Why do you want to know that?"
-				},
-				{
-					"showme":"false",
-					"text":"Or the easiest one,"
-				},
-				{
-					"showme":"false",
-					"text":"Do you want a candy?"
-				}
+			"type":"images",
+			"imgSources": [
+			  {"src":"therightresultswikipedia-1.png","showme":true},
+			  {"src":"therightresultswikipedia-2.png","showme":false}
 			]
 		}
 	],
@@ -149,7 +131,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
   "slideId":"whatiselastic",
 	"title":"What is elasticsearch?",
 	"subTitle":"more than search",
-	"description":"Before we can start explaining why elasticsearch returns the results that it does, you first need to know more about what elasticsearch is, what it can do for you and some terminology used thoughtout the remainder of the presentation. You will learn about structured and unstructured data, data sources and how we use the data.",
+	"description":"Before we can start explaining why elasticsearch returns the results that it does, you first need to know more about what elasticsearch is, what it can do for you and some terminology used though out the remainder of the presentation. You will learn about structured and unstructured data, data sources and how we use the data.",
 	"content": [
 		{
 			"type":"images",
@@ -171,23 +153,24 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
   "slideId":"introlucene",
 	"title":"Storing content",
 	"subTitle":"what we need Lucene for",
-	"description":"Introduce lucene, analyzers, terms and the inverted index.",
+	"description":"Introduce lucene, explain we use analyzers to create terms, the terms are stored in an inverted index and the inverted index is used to search the terms.",
 	"content": [
 		{
 			"type":"list",
 			"hideprogress":false,
+			"format":"shout",
 			"items": [
 			  {
 				"showme":true,
-				"text":"Use analyzer to create terms,"
+				"text":"Create terms,"
 			},
 			{
 				"showme":false,
-				"text":"Store terms in inverted index,"
+				"text":"Store terms,"
 			},
 			{
 				"showme":false,
-				"text":"Search fast through inverted index."
+				"text":"Search terms."
 			}
 			]
 		}
@@ -214,25 +197,6 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			]
 		}
 	],
-	"nextSlide":"executingquery"
-}'
-
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
-{
-  "slideId":"executingquery",
-	"title":"Executing a query",
-	"subTitle":"basic concepts",
-	"description":"In this slide I want to explain what it means to execute a query against elasticsearch.",
-	"content": [
-		{
-			"type":"images",
-			"imgSources": [
-			  {"src":"executingquery-1.jpg","showme":true},
-			  {"src":"executingquery-2.jpg","showme":true},
-			  {"src":"executingquery-3.jpg","showme":true}
-			]
-		}
-	],
 	"nextSlide":"executingqueryshards"
 }'
 
@@ -252,6 +216,25 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			  {"src":"executingqueryshards-4.jpg","showme":true},
 			  {"src":"executingqueryshards-5.jpg","showme":true},
 			  {"src":"executingqueryshards-6.jpg","showme":true}
+			]
+		}
+	],
+	"nextSlide":"executingquery"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"executingquery",
+	"title":"Executing a query",
+	"subTitle":"basic concepts",
+	"description":"This slide shows the both the apis that elasticsearch provideds. You can execute queries using the java api or the rest api through one of the available drivers. No matter what mechanism you choose you can use a lot of different queries.",
+	"content": [
+		{
+			"type":"images",
+			"imgSources": [
+			  {"src":"executingquery-1.jpg","showme":true},
+			  {"src":"executingquery-2.jpg","showme":true},
+			  {"src":"executingquery-3.jpg","showme":true}
 			]
 		}
 	],
@@ -298,7 +281,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"executequery",
 	"title":"Execute query",
-	"subTitle":"query string query",
+	"subTitle":"basic match query",
 	"description":"This is the most basic variant of executing a query.",
 	"content": [
 		{
@@ -319,93 +302,13 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			}
 		}
 	],
-	"nextSlide":"sortingresults"
-}'
-
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
-{
-  "slideId":"sortingresults",
-	"title":"Sorting results",
-	"subTitle":"by score and ...",
-	"description":"In this slide I want to discuss the options you have for sorting results.",
-	"content": [
-		{
-			"type":"list",
-			"hideprogress":true,
-			"items": [
-			  {
-				"showme":true,
-				"text":"Sort by score (the default),"
-			},
-			{
-				"showme":true,
-				"text":"Sort by date,"
-			},
-			{
-				"showme":true,
-				"text":"Sort by analyzed fields,"
-			}
-			]
-		},
-		{
-			"type":"notification",
-			"text":"GET /slides/_search"
-		},
-		{
-			"type":"query",
-			"queryType":"sort",
-			"explain":false,
-			"niceResults":true,
-			"query": {
-				"query": {
-					"match": {
-						"description":"What you type!"
-					}
-				},
-				"sort": [
-    				{
-      					"slideId": {
-        					"order": "asc"
-      					}
-    				}
-  				]
-			}
-		}
-	],
-	"nextSlide":"validatequery"
-}'
-
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
-{
-  "slideId":"validatequery",
-	"title":"Validate query",
-	"subTitle":"using validate api",
-	"description":"In this slide we are going to demonstrate the validate api for a query using explain as well, showing the query_string translation.",
-	"content": [
-		{
-			"type":"notification",
-			"text":"POST /slides/_validate/query?explain"
-		},
-		{
-			"type":"query",
-			"queryType":"validate",
-			"query": {
-				"query": {
-					"multi_match": {
-					  "query": "basic search",
-					  "fields": ["description","title","subTitle"]
-					}
-				}
-			}
-		}
-	],
 	"nextSlide":"explainquery"
 }'
 
 curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"explainquery",
-	"title":"Explain query results",
+	"title":"The calculated score",
 	"subTitle":"use the explain api",
 	"description":"Here we are going to discuss the most basic explain you can get.",
 	"content": [
@@ -434,7 +337,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
   "slideId":"explainqueryexplained",
 	"title":"Explain query explained",
 	"subTitle":"the basics",
-	"description":"In this slide I am going to show details about the explain basics.",
+	"description":"In this slide I am going to show details about the explain basics. This is important to notice the pattern that all explain queries will have for every term that is matched.",
 	"content": [
 		{
 			"type":"images",
@@ -595,7 +498,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
   "slideId":"explaintablematchquery",
 	"title":"An explain example",
 	"subTitle":"using match query",
-	"description":"In this slide we are going to use a very simple match query with an index containing only three documents.",
+	"description":"In this slide we are going to use a very simple match query with an index containing only three documents. The goal is to show the effect on term frequency, inverse document frequency and the fieldnorm with very little documents in the index.",
 	"content": [
 		{
 			"type":"notification",
@@ -643,6 +546,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"title":"Explain multiple terms",
 	"subTitle":"with a trick",
 	"description":"Here we are going to shows what happens to the results when using capital letters, multipe terms and introduce the camel case analyzer.",
+	"searchText":"OneTwoThree",
 	"content": [
 		{
 			"type":"notification",
@@ -687,7 +591,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
   "slideId":"showananalyser",
 	"title":"Show an analyzer",
 	"subTitle":"a basic analyzer",
-	"description":"Explain what the different components of an analyzer are.",
+	"description":"Show how to configure an analyzer when creating a new index.",
 	"content": [
 		{
 			"type":"notification",
@@ -728,7 +632,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
   "slideId":"onetwothreeanalyzer",
 	"title":"One Two Three Analyzer",
 	"subTitle":"settings",
-	"description":"Show the analyzer as used in the onetwothree sample with the camel case.",
+	"description":"Show the settings part of the analyzer as used in the onetwothree sample with the camel case.",
 	"content": [
 		{
 			"type":"notification",
@@ -748,7 +652,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
   "slideId":"onetwothreeanalyzer2",
 	"title":"One Two Three Analyzer",
 	"subTitle":"mappings",
-	"description":"Show the analyzer as used in the onetwothree sample with the camel case.",
+	"description":"Show the mappings part of the analyzer as used in the onetwothree sample with the camel case.",
 	"content": [
 		{
 			"type":"notification",
@@ -829,8 +733,38 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			]
 		}
 	],
+	"nextSlide":"validatequery"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"validatequery",
+	"title":"Validate query",
+	"subTitle":"using validate api",
+	"description":"In this slide we are going to demonstrate the validate api for a query using explain as well, showing the query_string translation.",
+	"searchText":"basic search",
+	"content": [
+		{
+			"type":"notification",
+			"text":"POST /slides/_validate/query?explain"
+		},
+		{
+			"type":"query",
+			"queryType":"validate",
+			"query": {
+				"query": {
+					"multi_match": {
+					  "query": "basic search",
+					  "fields": ["description","title","subTitle"]
+					}
+				}
+			}
+		}
+	],
 	"nextSlide":"explain2terms"
 }'
+
+
 
 curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 {
@@ -1304,8 +1238,62 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			"imgSource":"boostingquery.jpg"
 		}
 	],
+	"nextSlide":"sortingresults"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"sortingresults",
+	"title":"Sorting results",
+	"subTitle":"by score and ...",
+	"description":"In this slide I want to discuss the options you have for sorting results.",
+	"content": [
+		{
+			"type":"list",
+			"hideprogress":true,
+			"items": [
+			  {
+				"showme":true,
+				"text":"Sort by score (the default),"
+			},
+			{
+				"showme":true,
+				"text":"Sort by date,"
+			},
+			{
+				"showme":true,
+				"text":"Sort by analyzed fields,"
+			}
+			]
+		},
+		{
+			"type":"notification",
+			"text":"GET /slides/_search"
+		},
+		{
+			"type":"query",
+			"queryType":"sort",
+			"explain":false,
+			"niceResults":true,
+			"query": {
+				"query": {
+					"match": {
+						"description":"What you type!"
+					}
+				},
+				"sort": [
+    				{
+      					"slideId": {
+        					"order": "asc"
+      					}
+    				}
+  				]
+			}
+		}
+	],
 	"nextSlide":"questions"
 }'
+
 
 curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 {
@@ -1315,10 +1303,6 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"description":"Place holder sheet that can be used during the questions moment.",
 	"content": [
 		{
-			"type":"notification",
-			"text":"Do you have questions?"
-		},
-		{
 			"type":"illustration",
 			"imgSource":"question.jpg",
 			"size":"onethird",
@@ -1326,10 +1310,14 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 		},
 		{
 			"type":"text",
-			"text":"@jettroCoenradie"
+			"text":"jettro.coenradie@luminis.eu"
 		},
 		{
 			"type":"text",
+			"text":"@jettroCoenradie"
+		},
+		{
+			"type":"notification",
 			"text":"https://github.com/jettro/preso-explain"
 		}
 	],

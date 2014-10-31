@@ -38,7 +38,7 @@
                     </table>
                 </div>
                 <div ng-switch-when="list">
-                    <bullits listitems="item.items" hideprogress="item.hideprogress"/>
+                    <bullits listitems="item.items" hideprogress="item.hideprogress" format="item.format"/>
                 </div>
                 <div ng-switch-when="query">
                     <pre class="code">{{item.query | json}}</pre>

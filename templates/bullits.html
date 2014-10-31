@@ -2,10 +2,17 @@
 	<div class="row" ng-hide="hideprogress">
 		<div class="col-sm-1 col-sm-offset-11"><progressbar value="listProgress" type="info"></progressbar></div>	
 	</div>
-	<div class="row">
+	<div class="row" ng-if="!format">
 		<ul class="bullits">
 			<li ng-repeat="listItem in listitems" ng-show="listItem.showme" hotkey="{right:nextItem}">{{listItem.text}}</li>
 		</ul>
+	</div>
+	<div ng-if="format">
+		<div class="row" ng-repeat="listItem in listitems" ng-show="listItem.showme" hotkey="{right:nextItem}">
+			<div class="col-sm-10 col-sm-offset-1">
+				<div class="alert alert-success">{{listItem.text}}</div>
+			</div>
+		</div>		
 	</div>
 </div>
 
