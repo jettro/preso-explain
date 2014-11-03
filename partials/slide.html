@@ -65,6 +65,20 @@
                         </div>
                     </div>
                 </div>
+                <div ng-switch-when="validate">
+                    <pre class="code">{{item.query | json}}</pre>
+                    <form ng-submit="executeValidate(item.queryType,searchText)">
+                    <div class="input-group">                        
+                        <input type="text" class="form-control" ng-model="searchText">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit" >Search!</button>
+                        </span>
+                    </div><!-- /input-group -->
+                    </form>
+                    <div ng-show="searchResults">
+                        <pre class="code">{{searchResults.explanations | json}}</pre>
+                    </div>
+                </div>
                 <div ng-switch-when="query123">
                     <form class="form-inline" role="form" ng-submit="executeSearch123(searchText,searchOperator)">
                         <div class="btn-group">

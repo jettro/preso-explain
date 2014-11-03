@@ -61,13 +61,19 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys, $location) {
         elastic.doMatchDescription(queryType, searchText, explain, function(data) {
             $scope.searchResults = data;
         });
-    }
+    };
 
     $scope.executeSearch123 = function(searchText,searchOperator) {
         elastic.doMatch123(searchText, searchOperator, function(data) {
             $scope.searchResults = data;
         });
-    }
+    };
+
+    $scope.executeValidate = function(queryType,searchText) {
+        elastic.doValidateQuery(searchText,queryType, function(data) {
+            $scope.searchResults = data;
+        });
+    };
 
     $scope.executeQuery = function(type,parameter) {
         if ("settings" === type) {

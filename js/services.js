@@ -31,6 +31,30 @@ serviceModule.factory('elastic', ['esFactory', '$q', function (esFactory, $q) {
             });
         };
 
+        // queryType can be: match,multi_match_best,multi_match_most,multi_match_cross
+        this.doValidateQuery = function(textToFind, queryType, resultCallback) {
+            var query = {"index":"slides","explain":true,"body":{}};
+            if (queryType === "match") {
+                query.body.query = {"match":{"description":textToFind}};
+            } else if (queryType === "match_and") {
+                query.body.query = {"match":{"description":{"query":textToFind,"operator":"and"}}};
+            } else {
+                query.body.query = {
+                    "multi_match": {
+                        "query": textToFind,
+                        "fields":["title","subtitle","description"],
+                        "type":queryType
+                    }
+                };
+            }
+            es.indices.validateQuery(query)
+                .then(function (results) {
+                    resultCallback(results)
+                }, function (errors) {
+                    console.log(errors);
+                });
+        };
+
         this.doMatchDescription = function(queryType, textToFind, explain, resultCallback) {
             if (queryType === "validate") {
                 es.indices.validateQuery({

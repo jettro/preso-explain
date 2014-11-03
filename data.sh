@@ -26,6 +26,9 @@ curl -s -XPUT 'http://localhost:9200/slides' -d '
         "nextSlide": {
           "type": "string",
           "index": "not_analyzed"
+        },
+        "content": {
+        	"type":"object"
         }
       }
     }
@@ -383,61 +386,9 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			]
 		}
 	],
-	"nextSlide":"lucenebooleanmodel"
-}'
-
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
-{
-  "slideId":"lucenebooleanmodel",
-	"title":"Boolean model",
-	"subTitle":"must, must_not and should",
-	"description":"In this slide we are going to explain the transformation of all queries into a bool query.",
-	"content": [
-		{
-			"type":"code",
-			"code": {
-			  "query": {
-			    "match": {
-			      "description": "basic search elasticsearch"
-			    }
-			  }
-			}
-		},
-		{
-			"type":"code",
-			"code": {
-			  "query": {
-			    "bool": {
-			      "should": [
-			        {
-			          "term": {
-			            "description": {
-			              "value": "basic"
-			            }
-			          }
-			        },
-			        {
-			          "term": {
-			            "description": {
-			              "value": "search"
-			            }
-			          }
-			        },
-			        {
-			          "term": {
-			            "description": {
-			              "value": "elasticsearch"
-			            }
-			          }
-			        }
-			      ]
-			    }
-			  }
-			}			
-		}
-	],
 	"nextSlide":"lucenesimilarityformula"
 }'
+
 
 curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 {
@@ -741,7 +692,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
   "slideId":"validatequery",
 	"title":"Validate query",
 	"subTitle":"using validate api",
-	"description":"In this slide we are going to demonstrate the validate api for a query using explain as well, showing the query_string translation.",
+	"description":"In this slide we are going to demonstrate the validate api for a query using multiple terms.",
 	"searchText":"basic search",
 	"content": [
 		{
@@ -749,21 +700,119 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			"text":"POST /slides/_validate/query?explain"
 		},
 		{
-			"type":"query",
-			"queryType":"validate",
+			"type":"validate",
+			"queryType":"match",
+			"searchText":"basic query",
 			"query": {
-				"query": {
-					"multi_match": {
-					  "query": "basic search",
-					  "fields": ["description","title","subTitle"]
+				"match": {
+					"description": {
+						"query":"what you type"
 					}
 				}
 			}
 		}
 	],
-	"nextSlide":"explain2terms"
+	"nextSlide":"validatequeryand"
 }'
 
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"validatequeryand",
+	"title":"Validate query",
+	"subTitle":"using validate api",
+	"description":"In this slide we are going to demonstrate the validate api for a query using multiple terms using the and operator.",
+	"searchText":"basic search",
+	"content": [
+		{
+			"type":"notification",
+			"text":"POST /slides/_validate/query?explain"
+		},
+		{
+			"type":"validate",
+			"queryType":"match_and",
+			"searchText":"basic query",
+			"query": {
+				"match": {
+					"description": {
+						"query":"what you type",
+						"operator": "and"
+					}
+				}
+			}
+		}
+	],
+	"nextSlide":"boolquery"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"boolquery",
+	"title":"Bool query",
+	"subTitle":"the base for all queries",
+	"description":"Introduce the bool query as the base query to all other queries. In the end all queries can be written as a bool query. Explain the difference between operator AND/OR.",
+	"content": [
+		{
+			"type":"code",
+			"code": {
+			  "query": {
+			    "bool": {
+			      "must": [
+			        {}
+			      ],
+			      "must_not": [
+			        {}
+			      ],
+			      "should": [
+			        {}
+			      ]
+			    }
+			  }
+			}
+		}
+	],
+	"nextSlide":"lucenebooleanmodel"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"lucenebooleanmodel",
+	"title":"Boolean model",
+	"subTitle":"must, must_not and should",
+	"description":"In this slide we are going to explain the transformation of all queries into a bool query.",
+	"content": [
+		{
+			"type":"code",
+			"code": {
+			  "query": {
+			    "match": {
+			      "description": "basic search elasticsearch"
+			    }
+			  }
+			}
+		},
+		{
+			"type":"code",
+			"code": {
+			  "query": {
+			    "bool": {
+			      "should": [
+			        {
+			          "term": {"description": {"value": "basic"}}
+			        },
+			        {
+			          "term": {"description": {"value": "search"}}
+			        },
+			        {
+			          "term": {"description": {"value": "elasticsearch"}}
+			        }
+			      ]
+			    }
+			  }
+			}			
+		}
+	],
+	"nextSlide":"explain2terms"
+}'
 
 
 curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
@@ -860,6 +909,90 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 					"cols": ["","coord (2/3)",""]
 				}
 			]
+		}
+	],
+	"nextSlide":"validatequerybestfields"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"validatequerybestfields",
+	"title":"Validate query",
+	"subTitle":"using validate api",
+	"description":"In this slide we are going to demonstrate the validate api for a query using multiple terms and multiple fields with the default best_fields type query.",
+	"searchText":"basic search",
+	"content": [
+		{
+			"type":"notification",
+			"text":"POST /slides/_validate/query?explain"
+		},
+		{
+			"type":"validate",
+			"queryType":"best_fields",
+			"searchText":"basic query",
+			"query": {
+				"multi_match": {
+					"query": "what you type",
+					"fields":["title","subtitle","description"],
+					"type":"best_fields"
+				}
+			}
+		}
+	],
+	"nextSlide":"validatequerymostfields"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"validatequerymostfields",
+	"title":"Validate query",
+	"subTitle":"using validate api",
+	"description":"In this slide we are going to demonstrate the validate api for a query using multiple terms and multiple fields with the most_fields type query.",
+	"searchText":"basic search",
+	"content": [
+		{
+			"type":"notification",
+			"text":"POST /slides/_validate/query?explain"
+		},
+		{
+			"type":"validate",
+			"queryType":"most_fields",
+			"searchText":"basic query",
+			"query": {
+				"multi_match": {
+					"query": "what you type",
+					"fields":["title","subtitle","description"],
+					"type":"most_fields"
+				}
+			}
+		}
+	],
+	"nextSlide":"validatequerycrossfields"
+}'
+
+curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"validatequerycrossfields",
+	"title":"Validate query",
+	"subTitle":"using validate api",
+	"description":"In this slide we are going to demonstrate the validate api for a query using multiple terms and multiple fields with the cross_fields type query.",
+	"searchText":"basic search",
+	"content": [
+		{
+			"type":"notification",
+			"text":"POST /slides/_validate/query?explain"
+		},
+		{
+			"type":"validate",
+			"queryType":"cross_fields",
+			"searchText":"basic query",
+			"query": {
+				"multi_match": {
+					"query": "what you type",
+					"fields":["title","subtitle","description"],
+					"type":"cross_fields"
+				}
+			}
 		}
 	],
 	"nextSlide":"explainbestof"
@@ -1274,7 +1407,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			"type":"query",
 			"queryType":"sort",
 			"explain":false,
-			"niceResults":true,
+			"niceResults":false,
 			"query": {
 				"query": {
 					"match": {
@@ -1322,36 +1455,6 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 		}
 	],
 	"nextSlide":"start"
-}'
-
-
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
-{
-  "slideId":"boolquery",
-	"title":"Bool query",
-	"subTitle":"the base for all queries",
-	"description":"Introduce the bool query as the base query to all other queries. In the end all queries can be written as a bool query. Explain the difference between operator AND/OR.",
-	"content": [
-		{
-			"type":"code",
-			"code": {
-			  "query": {
-			    "bool": {
-			      "must": [
-			        {}
-			      ],
-			      "must_not": [
-			        {}
-			      ],
-			      "should": [
-			        {}
-			      ]
-			    }
-			  }
-			}
-		}
-	],
-	"nextSlide":"nothing"
 }'
 
 # Some ideas for next slides
