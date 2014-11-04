@@ -1,0 +1,67 @@
+<div class="row">
+    <div class="col-md-12">
+    	<h1>Summary</h1>
+    	<div ng-repeat="slide in searchResults track by $index">
+    		<h2 class="well">{{$index + 1}}: {{slide.title}}</h2>
+    		<span class="subtitle">{{slide.subTitle}}</span>
+    		<p>{{slide.description}}</p>
+	        <div ng-repeat="item in slide.content">
+    	        <div ng-switch="item.type">
+	                <div ng-switch-when="notification">
+	                    <div class="alert alert-success" role="alert">{{item.text}}</div>
+	                </div>                
+	                <div ng-switch-when="reference">
+	                    <div class="alert alert-info" role="alert">{{item.reference}}</div>
+	                </div>                
+	                <div ng-switch-when="image">
+	                    <img class="complete" ng-src="img/{{item.imgSource}}"/>
+	                </div>
+		            <div ng-switch-when="images">
+					  <div ng-repeat="image in item.imgSources">
+					    <img ng-src="img/{{image.src}}"/>
+					  </div>
+		            </div>
+	                <div ng-switch-when="illustration">
+	                    <img class="{{item.size}} {{item.location}}" ng-class="{'pull-right':item.pullright}" ng-src="img/{{item.imgSource}}"/>
+	                </div>
+	                <div ng-switch-when="quote" class="clearfix">                    
+	                    <div>
+	                        <div class="col-md-6 col-md-offset-4">
+	                            <p class="text-right title">{{item.text}}</p>
+	                            <p class="text-right author">{{item.author}}</p>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div ng-switch-when="table">
+	                    <table class="table {{item.class}}">
+	                        <tr ng-repeat="currentRow in item.rows">
+	                            <td ng-class="{heading:((item.firstColHeading && $index==0) || currentRow.highlight)}" ng-repeat="currentCol in currentRow.cols track by $index" ng-attr-colspan="{{currentRow.colspan}}">
+	                                {{currentCol}}
+	                            </td>
+	                        </tr>
+	                    </table>
+	                </div>
+	                <div ng-switch-when="list">
+						<ul class="bullits">
+							<li ng-repeat="listItem in item.items">{{listItem.text}}</li>
+						</ul>	                    
+	                </div>
+	                <div ng-switch-when="query">
+	                    <pre class="code">{{item.query | json}}</pre>
+	                    <span class="label label-warning">Results only in life presentation</span>
+	                </div>
+	                <div ng-switch-when="query123">
+	                    <span class="label label-warning">Results only in life presentation</span>
+	                </div>
+	                <div ng-switch-when="code">
+	                    <pre class="code">{{item.code | json}}</pre>
+	                </div>
+	                <div ng-switch-when="text">{{item.text}}</div>
+	                <div ng-switch-when="executeget">
+	                    <span class="label label-warning">Results only in life presentation</span>
+	                </div>
+    	        </div>
+        	</div>
+    	</div>
+    </div>
+</div>

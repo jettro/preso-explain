@@ -1,8 +1,8 @@
 #!/bin/bash
 
-curl -s -w "\n" -w "\n" -XDELETE http://localhost:9200/slides
+curl -s -w "\n" -XDELETE http://localhost:9200/slides
 
-curl -s -w "\n" -w "\n" -XPUT 'http://localhost:9200/slides' -d '
+curl -s -w "\n" -XPUT 'http://localhost:9200/slides' -d '
 {
   "mappings": {
     "slide": {
@@ -1515,8 +1515,73 @@ curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 		}
 
 	],
+	"nextSlide":"functionscorequery"
+}'
+
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"functionscorequery",
+	"title":"Function score query",
+	"subTitle":"using popularity",
+	"description":"One query that is used a lot on news sites is the function_score query. With this query you can change the score based on another field like the popularity or recency. In this slide we discuss the effect on the explain output for such a query.",
+	"content": [
+		{
+			"type":"notification",
+			"text":"GET /blogging/_search?explain"
+		},
+		{
+			"type":"code",
+			"code": {
+				"query": {
+					"function_score": {
+						"query": {
+							"match": {
+								"description": "elasticsearch"
+							}
+						},
+						"functions": [
+							{
+								"field_value_factor": {
+									"field": "popularity",
+									"factor": 1.2,
+									"modifier": "ln"
+								}
+							}
+						]
+					}
+				}
+			}
+		},
+		{
+			"type":"table",
+			"class":"table-bordered table-hover",
+			"rows": [
+				{
+					"highlight":true,
+					"colspan":"3",
+					"cols":["structure of the score calculation"]
+				},
+				{
+					"cols": ["function score [*]","",""]
+				},			
+				{
+					"cols": ["","description:elasticsearch",""]
+				},
+				{
+					"cols": ["","Math.min",""]
+				},
+				{
+					"cols": ["","","ln(doc[popularity].value * factor=1.2)"]
+				},
+				{
+					"cols": ["","","maxBoost"]
+				}
+			]
+		}
+	],
 	"nextSlide":"rightprocessrightresults"
 }'
+
 
 curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {

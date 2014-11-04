@@ -5,6 +5,7 @@ var myApp = angular.module('myApp', ['ngRoute','myApp.filters', 'myApp.services'
         config(['$routeProvider', function ($routeProvider) {
             $routeProvider.when('/slide/:slideId', {templateUrl: 'partials/slide.html', controller: SlideCtrl});
             $routeProvider.when('/search', {templateUrl: 'partials/search.html', controller: SearchCtrl});
+            $routeProvider.when('/print', {templateUrl: 'partials/print.html', controller: PrintCtrl});
             $routeProvider.otherwise({redirectTo: '/slide/start'});
         }]);
         

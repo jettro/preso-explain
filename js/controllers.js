@@ -36,6 +36,14 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys, $location) {
     });
 
     hotkeys.add({
+        combo: 'ctrl+p',
+        description: 'Open the print slide.',
+        callback: function(event,hotkey) {
+            $location.path("/print");
+        }
+    });
+
+    hotkeys.add({
         combo: 'ctrl+l',
         description: 'Open the last slide.',
         callback: function() {
@@ -146,3 +154,21 @@ function SearchCtrl($scope, elastic, $location) {
     });    
 }
 SearchCtrl.$inject = ['$scope', 'elastic', '$location'];
+
+function PrintCtrl($scope, elastic, $location) {
+    $scope.searchResults = [];
+
+    function doShowSlide(slideId) {
+        elastic.obtainSlide(slideId, function(data) {
+            $scope.searchResults.push(data);
+            if ("start" != data.nextSlide) {
+                doShowSlide(data.nextSlide)
+            }
+        });
+    }
+
+    $scope.$on('$viewContentLoaded', function () {
+        doShowSlide("start");
+    });    
+}
+PrintCtrl.$inject = ['$scope', 'elastic', '$location'];
