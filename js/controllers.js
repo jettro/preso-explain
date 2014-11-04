@@ -39,7 +39,7 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys, $location) {
         combo: 'ctrl+l',
         description: 'Open the last slide.',
         callback: function() {
-        elastic.obtainPreviousSlide('start', function(data) {
+        elastic.obtainPreviousSlide('questions', function(data) {
             if (data) {
                 var path = $location.path().replace($scope.slide.slideId,data.slideId);
                 $location.path(path);

@@ -15,7 +15,13 @@ curl -s -w "\n" -w "\n" -XPUT 'http://localhost:9200/slides' -d '
           "index":"not_analyzed"
         },
         "title": {
-          "type": "string"
+          "type": "string",
+          "fields": {
+          	"raw": {
+          		"type":"string",
+          		"index":"not_analyzed"
+          	}
+          }
         },
         "subTitle": {
           "type": "string"
@@ -154,8 +160,8 @@ curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"introlucene",
-	"title":"Storing content",
-	"subTitle":"what we need Lucene for",
+	"title":"Lucene",
+	"subTitle":"what we need it for",
 	"description":"Introduce lucene, explain we use analyzers to create terms, the terms are stored in an inverted index and the inverted index is used to search the terms.",
 	"content": [
 		{
@@ -497,7 +503,7 @@ curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 	"title":"Explain multiple terms",
 	"subTitle":"with a trick",
 	"description":"Here we are going to shows what happens to the results when using capital letters, multipe terms and introduce the camel case analyzer.",
-	"searchText":"OneTwoThree",
+	"searchText":"one two three",
 	"content": [
 		{
 			"type":"notification",
@@ -532,47 +538,6 @@ curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 					"cols": ["Token filters","Do something with the tokens"]
 				}
 			]
-		}
-	],
-	"nextSlide":"showananalyser"
-}'
-
-curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
-{
-  "slideId":"showananalyser",
-	"title":"Show an analyzer",
-	"subTitle":"a basic analyzer",
-	"description":"Show how to configure an analyzer when creating a new index.",
-	"content": [
-		{
-			"type":"notification",
-			"text":"PUT /newindex"
-		},
-		{
-			"type":"code",
-			"code": {
-			  "settings": {
-			      "analysis": {
-			        "analyzer": {
-			          "filtered_keyword" : {
-			            "type":"custom",
-			            "tokenizer":"keyword",
-			            "filter": ["lowercase","asciifolding"]
-			          }
-			        }
-			      }
-			  },
-			  "mappings": {
-			    "mytype": {
-			      "properties": {
-			        "title": {
-			          "type": "string",
-			          "analyzer": "filtered_keyword"
-			        }
-			      }
-			    }
-			  }
-			}
 		}
 	],
 	"nextSlide":"onetwothreeanalyzer"
@@ -1407,7 +1372,7 @@ curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 			"type":"query",
 			"queryType":"sort",
 			"explain":false,
-			"niceResults":false,
+			"niceResults":true,
 			"query": {
 				"query": {
 					"match": {
@@ -1416,7 +1381,7 @@ curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 				},
 				"sort": [
     				{
-      					"slideId": {
+      					"title.raw": {
         					"order": "asc"
       					}
     				}
@@ -1561,6 +1526,10 @@ curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 	"description":"Explain the right process to produce the right results.",
 	"content": [
 		{
+			"type":"image",
+			"imgSource":"therightresultswikipedia-2.png"
+		},
+		{
 			"type":"notification",
 			"text":"The right process to produce the right results."
 		},
@@ -1568,7 +1537,7 @@ curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 			"type":"list",
 			"items":[
 				{
-					"showme":true,
+					"showme":false,
 					"text":"Use the correct analyzer,"
 				},
 				{

@@ -89,7 +89,7 @@ serviceModule.factory('elastic', ['esFactory', '$q', function (esFactory, $q) {
                 if (queryType === "match") {
                     query = {"query":{"match":{"description":textToFind}}};
                 } else if (queryType === "sort") {
-                    query = {"query":{"match":{"description":textToFind}},"sort":[{"slideId":{"order":"asc"}}]};
+                    query = {"query":{"match":{"description":textToFind}},"sort":[{"title.raw":{"order":"asc"}}]};
                 }
                 es.search({
                     "index":"slides",

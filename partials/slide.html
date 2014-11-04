@@ -44,9 +44,9 @@
                     <pre class="code">{{item.query | json}}</pre>
                     <form ng-submit="executeSearch(item.queryType,item.explain,searchText)">
                     <div class="input-group">                        
-                        <input type="text" class="form-control" ng-model="searchText">
+                        <input type="text" class="form-control input-lg" ng-model="searchText">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="submit" >Search!</button>
+                            <button class="btn btn-default btn-lg" type="submit" >Search!</button>
                         </span>
                     </div><!-- /input-group -->
                     </form>
@@ -55,7 +55,7 @@
                         <div ng-show="item.niceResults">
                             <div ng-repeat="result in searchResults.hits.hits">
                                 <div>
-                                    <h3>{{result._source.title}}({{result._score}})</h3>
+                                    <h3>{{result._source.title}}({{result._score || "0"}})</h3>
                                     <span>{{result._source.description}}</span>
                                 </div>
                             </div>
@@ -69,9 +69,9 @@
                     <pre class="code">{{item.query | json}}</pre>
                     <form ng-submit="executeValidate(item.queryType,searchText)">
                     <div class="input-group">                        
-                        <input type="text" class="form-control" ng-model="searchText">
+                        <input type="text" class="form-control input-lg" ng-model="searchText">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="submit" >Search!</button>
+                            <button class="btn btn-default btn-lg" type="submit" >Search!</button>
                         </span>
                     </div><!-- /input-group -->
                     </form>
@@ -82,26 +82,33 @@
                 <div ng-switch-when="query123">
                     <form class="form-inline" role="form" ng-submit="executeSearch123(searchText,searchOperator)">
                         <div class="btn-group">
-                            <label class="btn btn-default" ng-model="searchOperator" btn-radio="'or'">OR</label>
-                            <label class="btn btn-default" ng-model="searchOperator" btn-radio="'and'">AND</label>
+                            <label class="btn btn-default btn-lg" ng-model="searchOperator" btn-radio="'or'">OR</label>
+                            <label class="btn btn-default btn-lg" ng-model="searchOperator" btn-radio="'and'">AND</label>
                         </div>
                         <div class="form-group">
                             <div class="input-group">                        
-                                <input type="text" class="form-control" ng-model="searchText">
+                                <input type="text" class="form-control input-lg" ng-model="searchText">
                             </div>
                         </div>
-                        <button class="btn btn-default" type="submit" >Search!</button>
+                        <button class="btn btn-default btn-lg" type="submit" >Search!</button>
                     </form>
-                    <div ng-show="searchResults">
-                        <pre class="code">{{searchResults | json}}</pre>
-                    </div>
+                        <div>
+                            <div ng-repeat="result in searchResults.hits.hits">
+                                <div>
+                                    <h3>{{result._source.title}}({{result._score || "0"}})</h3>
+                                </div>
+                            </div>
+                            <div ng-if="searchResults.hits.total == 0">
+                                <span class="label label-warning">No results found</span>
+                            </div>
+                        </div>
                 </div>
                 <div ng-switch-when="fuzzy">
                     <pre class="code">{{item.query | json}}</pre>
                     <form ng-submit="executeFuzzy(item.query)">
                     <div class="input-group">                        
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="submit" >Execute!</button>
+                            <button class="btn btn-default btn-lg" type="submit" >Execute!</button>
                         </span>
                     </div>
                     </form>
@@ -109,7 +116,7 @@
                         <div>
                             <div ng-repeat="result in searchResults.hits.hits">
                                 <div>
-                                    <h3>{{result._source.title}}({{result._score}})</h3>
+                                    <h3>{{result._source.title}}({{result._score || "0"}})</h3>
                                     <span>{{result._source.description}}</span>
                                 </div>
                             </div>
@@ -124,7 +131,7 @@
                 </div>
                 <div ng-switch-when="text">{{item.text}}</div>
                 <div ng-switch-when="executeget">
-                    <button class="btn btn-default" type="button" ng-click="executeQuery(item.executetype,item.parameter)">Execute!</button>
+                    <button class="btn btn-default btn-lg" type="button" ng-click="executeQuery(item.executetype,item.parameter)">Execute!</button>
                     <div ng-show="searchResults">
                         <pre class="code">{{searchResults | json}}</pre>
                     </div>
