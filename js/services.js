@@ -55,6 +55,17 @@ serviceModule.factory('elastic', ['esFactory', '$q', function (esFactory, $q) {
                 });
         };
 
+        this.doExecuteFuzzy = function(query,resultCallback) {
+                es.search({
+                    "index":"slides",
+                    "body": query
+                }).then(function (results) {
+                    resultCallback(results)
+                }, function (errors) {
+                    console.log(errors);
+                });
+        };
+
         this.doMatchDescription = function(queryType, textToFind, explain, resultCallback) {
             if (queryType === "validate") {
                 es.indices.validateQuery({

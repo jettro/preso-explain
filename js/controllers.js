@@ -75,6 +75,12 @@ function SlideCtrl($scope, elastic, $routeParams, hotkeys, $location) {
         });
     };
 
+    $scope.executeFuzzy = function(query) {
+        elastic.doExecuteFuzzy(query, function(data) {
+            $scope.searchResults = data;
+        });
+    };
+
     $scope.executeQuery = function(type,parameter) {
         if ("settings" === type) {
             elastic.obtainSettings(parameter, function(data) {

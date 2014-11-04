@@ -96,6 +96,29 @@
                         <pre class="code">{{searchResults | json}}</pre>
                     </div>
                 </div>
+                <div ng-switch-when="fuzzy">
+                    <pre class="code">{{item.query | json}}</pre>
+                    <form ng-submit="executeFuzzy(item.query)">
+                    <div class="input-group">                        
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit" >Execute!</button>
+                        </span>
+                    </div>
+                    </form>
+                    <div ng-show="searchResults">
+                        <div>
+                            <div ng-repeat="result in searchResults.hits.hits">
+                                <div>
+                                    <h3>{{result._source.title}}({{result._score}})</h3>
+                                    <span>{{result._source.description}}</span>
+                                </div>
+                            </div>
+                            <div ng-if="searchResults.hits.total == 0">
+                                <span class="label label-warning">No results found</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div ng-switch-when="code">
                     <pre class="code">{{item.code | json}}</pre>
                 </div>

@@ -1,8 +1,8 @@
 #!/bin/bash
 
-curl -s -XDELETE http://localhost:9200/slides
+curl -s -w "\n" -w "\n" -XDELETE http://localhost:9200/slides
 
-curl -s -XPUT 'http://localhost:9200/slides' -d '
+curl -s -w "\n" -w "\n" -XPUT 'http://localhost:9200/slides' -d '
 {
   "mappings": {
     "slide": {
@@ -35,7 +35,7 @@ curl -s -XPUT 'http://localhost:9200/slides' -d '
   }
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"start",
     "hidetitle":true,
@@ -64,7 +64,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"aboutme"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"aboutme",
 	"title":"About me",
@@ -96,7 +96,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"rightresults"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"rightresults",
 	"title":"The right results",
@@ -111,7 +111,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"rightresultswikipedia"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"rightresultswikipedia",
 	"title":"The right results",
@@ -129,7 +129,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"whatiselastic"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"whatiselastic",
 	"title":"What is elasticsearch?",
@@ -151,7 +151,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"introlucene"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"introlucene",
 	"title":"Storing content",
@@ -183,7 +183,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 
 
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"elasticlucene",
 	"title":"Elasticsearch and lucene",
@@ -203,7 +203,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"executingqueryshards"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"executingqueryshards",
 	"title":"Executing a query",
@@ -225,7 +225,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"executingquery"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"executingquery",
 	"title":"Executing a query",
@@ -244,7 +244,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"showcurl"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"showcurl",
 	"title":"Example with curl",
@@ -259,7 +259,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"otherquerytool"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"otherquerytool",
 	"title":"Other query tools",
@@ -280,7 +280,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"executequery"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"executequery",
 	"title":"Execute query",
@@ -308,7 +308,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"explainquery"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"explainquery",
 	"title":"The calculated score",
@@ -335,7 +335,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"explainqueryexplained"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"explainqueryexplained",
 	"title":"Explain query explained",
@@ -357,7 +357,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"explaintheorysimilarity"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"explaintheorysimilarity",
 	"title":"Calculating score",
@@ -390,7 +390,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 }'
 
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"lucenesimilarityformula",
 	"title":"Lucene similarity",
@@ -409,7 +409,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"explaintheorytfidf"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"explaintheorytfidf",
 	"title":"Calculating score",
@@ -444,7 +444,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"explaintablematchquery"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"explaintablematchquery",
 	"title":"An explain example",
@@ -491,7 +491,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"explainonetwothree"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"explainonetwothree",
 	"title":"Explain multiple terms",
@@ -510,7 +510,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"whatisanalyser"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"whatisanalyser",
 	"title":"What is an analyzer",
@@ -537,7 +537,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"showananalyser"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"showananalyser",
 	"title":"Show an analyzer",
@@ -578,7 +578,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"onetwothreeanalyzer"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"onetwothreeanalyzer",
 	"title":"One Two Three Analyzer",
@@ -598,7 +598,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"onetwothreeanalyzer2"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"onetwothreeanalyzer2",
 	"title":"One Two Three Analyzer",
@@ -618,7 +618,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"onetwothreeanalyzer3"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"onetwothreeanalyzer3",
 	"title":"One Two Three Analyzer",
@@ -638,7 +638,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"backtoexplain"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"backtoexplain",
 	"title":"Back to explain",
@@ -687,7 +687,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"validatequery"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"validatequery",
 	"title":"Validate query",
@@ -715,7 +715,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"validatequeryand"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"validatequeryand",
 	"title":"Validate query",
@@ -744,7 +744,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"boolquery"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"boolquery",
 	"title":"Bool query",
@@ -773,7 +773,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"lucenebooleanmodel"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"lucenebooleanmodel",
 	"title":"Boolean model",
@@ -815,7 +815,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 }'
 
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"explain2terms",
 	"title":"Explain 2 terms",
@@ -863,7 +863,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"explain3terms"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"explain3terms",
 	"title":"Explain 3 terms",
@@ -914,7 +914,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"validatequerybestfields"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"validatequerybestfields",
 	"title":"Validate query",
@@ -942,7 +942,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"validatequerymostfields"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"validatequerymostfields",
 	"title":"Validate query",
@@ -970,7 +970,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"validatequerycrossfields"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"validatequerycrossfields",
 	"title":"Validate query",
@@ -998,7 +998,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"explainbestof"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"explainbestof",
 	"title":"Explain multi_field",
@@ -1060,7 +1060,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"explainmostfields"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"explainmostfields",
 	"title":"Explain multi_field",
@@ -1122,7 +1122,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"explaincrossfields"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"explaincrossfields",
 	"title":"Explain multi_field",
@@ -1178,7 +1178,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"explaindismax"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"explaindismax",
 	"title":"Explain dis_max query",
@@ -1252,7 +1252,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"multipletermsandfields"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"multipletermsandfields",
 	"title":"Multile terms and fields",
@@ -1284,7 +1284,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"boosting"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"boosting",
 	"title":"Boosting",
@@ -1335,7 +1335,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"boostingquery"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"boostingquery",
 	"title":"Boosting query",
@@ -1374,7 +1374,7 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 	"nextSlide":"sortingresults"
 }'
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"sortingresults",
 	"title":"Sorting results",
@@ -1424,11 +1424,173 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 			}
 		}
 	],
-	"nextSlide":"questions"
+	"nextSlide":"fuzzyquery"
+}'
+
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"fuzzyquery",
+	"title":"Fuzzy query",
+	"subTitle":"taking care of typos",
+	"description":"In here we are going to demonstrate the effect of fuzzy searching on the score. We are going to use the term basik which is wrong for all slides except this slide. Show what happens with the boost factor for documents with that match due to the fuzzy matching.",
+	"content": [
+		{
+			"type":"fuzzy",
+			"query": {
+				"query": {
+					"fuzzy": {
+						"description": {
+							"value": "basik",
+							"min_similarity": 0.5
+						}
+					}
+				}
+			}
+		}
+	],
+	"nextSlide":"fuzzyqueryexplain"
+}'
+
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"fuzzyqueryexplain",
+	"title":"Fuzzy query",
+	"subTitle":"explain score for match",
+	"description":"Explain why the score for the document with the fuzzy match is higher than the score for the exact match.",
+	"content": [
+		{
+			"type":"text",
+			"text":"Total score is a product of field and query weight."
+		},
+		{
+			"type":"table",
+			"firstColHeading":true,
+			"rows":[
+				{
+					"highlight":true,
+					"cols":["found term","query weight","field weight"]
+				},
+				{
+					"cols":["description:basic^0.8","0.36849","0.992109"]
+				},
+				{
+					"cols":["description:basik","0.59356","0.51138"]
+				}
+			]
+		}
+
+	],
+	"nextSlide":"fuzzyquerysignal"
 }'
 
 
-curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"fuzzyquerysignal",
+	"title":"Fuzzy query",
+	"subTitle":"enhance result with a signal",
+	"description":"Since we got the wrong document on top with the previous fuzzy query we now want to help improve the results with a Signal. A signal can help to change the score in a way you prefer. In this case we make the score higher if there is an exact match.",
+	"content": [
+		{
+			"type":"fuzzy",
+			"query": {
+				"query": {
+					"bool": {
+						"must": [
+							{
+								"fuzzy": {
+									"description": {
+										"value": "basik",
+										"min_similarity": 0.5
+									}
+								}
+							}
+						],
+						"should": [
+							{
+								"match": {
+									"description": "basik"
+								}
+							}
+						]
+					}
+				}
+			}
+		}
+	],
+	"nextSlide":"fuzzyquerysignalexplain"
+}'
+
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"fuzzyquerysignalexplain",
+	"title":"Fuzzy query",
+	"subTitle":"explain score for match",
+	"description":"Explain why adding a signal query as a should query with a match query does change the order of the results.",
+	"content": [
+		{
+			"type":"text",
+			"text":"No match means a coord penalty."
+		},
+		{
+			"type":"table",
+			"firstColHeading":true,
+			"rows":[
+				{
+					"highlight":true,
+					"cols":["found term","must (fuzzy)","should (match)"]
+				},
+				{
+					"cols":["description:basik","0.26101","0.26101"]
+				},
+				{
+					"cols":["description:basic^0.8","0.31438","* 0.5 (coord 1/2)"]
+				}
+			]
+		}
+
+	],
+	"nextSlide":"rightprocessrightresults"
+}'
+
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
+{
+  "slideId":"rightprocessrightresults",
+	"title":"Summarizing",
+	"subTitle":"the take away",
+	"description":"Explain the right process to produce the right results.",
+	"content": [
+		{
+			"type":"notification",
+			"text":"The right process to produce the right results."
+		},
+		{
+			"type":"list",
+			"items":[
+				{
+					"showme":true,
+					"text":"Use the correct analyzer,"
+				},
+				{
+					"showme":false,
+					"text":"Construct the right query,"
+				},
+				{
+					"showme":false,
+					"text":"Analyze the results with your users,"
+				},
+				{
+					"showme":false,
+					"text":"Explain the results using explain/validate and improve."
+				}
+			]
+		}
+
+	],
+	"nextSlide":"questions"
+}'
+
+curl -s -w "\n" -XPOST 'http://localhost:9200/slides/slide' -d '
 {
   "slideId":"questions",
 	"title":"Questions",
@@ -1458,10 +1620,6 @@ curl -s -XPOST 'http://localhost:9200/slides/slide' -d '
 }'
 
 # Some ideas for next slides
-# Don't forget the tie breaker and of course the boost, what is the impact to score
-# What about signals, there are a lot but what do we mean with it, how does it infleunce the score.
-# Check, I think the signals is one of the should queries that can have multiple signals.
 # Have a look at the function_score query (dates and popularity)
 # Create a reference section, also to the elasticsearch book
-# I think a last slide that explain that tuning the results is cool, but often you do not really need it. Use instrumentation to check what people are doing with your search results.
 # What is the impact for explain using an ngram query.
